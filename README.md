@@ -3,7 +3,6 @@
 **16 Pure-Code Faceted Crystal Origami Cat QA Agents auditing both Human UX (0–100) and 2026 Autonomous AI Agent Readiness (0–100) at $0 LLM API cost.**
 
 Zero runtime npm dependencies (96.8 KB tarball) — requires only Node.js 18+ and a local Chromium-based browser (Chrome, Chromium, Edge, or Brave; even `--gif` includes a pure-JS GIF89a encoder with zero `ffmpeg` required).
-<img width="800" height="450" alt="PawTest v3.1 Demo" src="https://raw.githubusercontent.com/waterdolphinkiller/pawtest/main/pawtest-v31-hero.gif" />
 ## Quick Start
 
 ```bash
