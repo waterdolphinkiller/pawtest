@@ -48,4 +48,4 @@ jobs:
         with:
           node-version: 22
       - name: Run TypeScript 5.8 Check
-        run: npx --yes typescript@5.8 tsc --noEmit
+npx --yes -p typescript@5.8 tsc --noEmit
