@@ -1,0 +1,20 @@
+# PawTest — 16 Pure-Code Optical Cat QA Agents
+
+> Zero-config, $0 API cost CLI & MCP Server auditing both **Human UX (0–100)** and **AI Agent Readiness (0–100)** across 16 deterministic browser probes.
+
+## Quick Start
+- Fast 8-cat audit (<45s): `npx pawtest https://your-site.com`
+- Full 16-cat audit + share card + 5s failure GIF: `npx pawtest https://your-site.com --full --share-card --gif`
+- Start 3-tool MCP Server for Claude Code / Cursor: `npx pawtest --mcp`
+
+## 4x4 Optical Cat Matrix
+- **Squad A (Human UX)**: A1 Marmalade (form fuzzing/XSS), A2 Zoomies (3G & idempotency), A3 Mochi (375px–4K responsive & 175% font), A4 Pixel (404s, broken images, console errors)
+- **Squad B (Perf/A11y/SEO)**: B1 Naps (Core Web Vitals LCP/CLS/INP), B2 Shadow (WCAG 2.2 contrast & focus traps), B3 Scout (SEO & OG tags), B4 Chaos (offline & auth fallback)
+- **Squad C (Security & GEO)**: C1 Vault (secret leaks & CSP/HSTS/CORS), C2 RoboCat (/llms.txt, Markdown Token-Tax, JSON-LD), C3 Leak (JS Heap & <44px targets), C4 Clever (core flow & AI chat SSE)
+- **Squad D (Autonomous AI Agents)**: D1 MuseBot (AXTree & W3C WebMCP), D2 Antidote (Indirect Prompt Injection & Unicode Tag smuggling), D3 Sentinel (destructive confirmation gates & 429 Retry-After), D4 Lucky (/.well-known/ucp, ACP/AP2 & RFC 9421 Web Bot Auth)
+
+## Machine-Readable Endpoints
+- Markdown representation: `/index.md`
+- Universal Commerce Protocol: `/.well-known/ucp`
+- Agentic Commerce Protocol: `/.well-known/acp`
+- Crawler policy: `/robots.txt`

@@ -1,0 +1,5 @@
+﻿node_modules/
+pawtest-report/
+.DS_Store
+*.tgz
+*.log

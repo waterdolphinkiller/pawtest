@@ -1,0 +1,18 @@
+{
+  "protocol": "ucp",
+  "version": "2026-01",
+  "merchant": {
+    "name": "PawTest Open Source",
+    "url": "https://pawtest.dev",
+    "license": "MIT"
+  },
+  "capabilities": [
+    "catalog.read",
+    "checkout.confirm_required",
+    "web_bot_auth.rfc9421"
+  ],
+  "endpoints": {
+    "catalog": "/index.md",
+    "docs": "/llms.txt"
+  }
+}

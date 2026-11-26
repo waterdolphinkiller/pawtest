@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PawTest — 16 Pure-Code Optical Cat QA Agents for Humans &amp; AI Agents</title>
+  <meta name="description" content="Zero-config, $0 API cost CLI &amp; MCP Server that audits both Human UX (0-100) and AI Agent Readiness (0-100) across 16 deterministic browser probes." />
+  <link rel="canonical" href="https://pawtest.dev/" />
+  <link rel="alternate" type="text/markdown" href="./index.md" />
+  <link rel="describedby" href="./llms.txt" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PawTest — 16 Optical Cat QA Agents (Human UX &times; AI Agent Readiness)" />
+  <meta property="og:description" content="Run npx pawtest &lt;url&gt; for deterministic dual-axis QA: WCAG 2.2, Core Web Vitals, Secret Leaks, Markdown Token-Tax, W3C WebMCP, Prompt Injection, UCP/ACP &amp; RFC 9421." />
+  <meta property="og:image" content="./assets/social-cover-1280x640.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PawTest",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "softwareVersion": "3.1.1",
+    "license": "https://opensource.org/licenses/MIT",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "16 pure-code 3D optical cat QA agents auditing both Human UX and AI Agent Readiness at $0 LLM API cost."
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0f0d0c;
+      --surface: #1b1715;
+      --surface-2: #241f1c;
+      --border: #3d352f;
+      --text: #faf6f1;
+      --muted: #cfc5bb;
+      --amber: #f59e0b;
+      --amber-text: #11100f;
+      --green: #4ade80;
+      --violet: #c4b5fd;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: #fbbf24; text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid #fbbf24;
+      outline-offset: 2px;
+    }
+    .skip-link {
+      position: absolute; left: -9999px; top: 8px;
+      background: var(--amber); color: var(--amber-text);
+      padding: 12px 16px; font-weight: 800; border-radius: 8px; z-index: 100;
+    }
+    .skip-link:focus { left: 16px; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; padding: 14px 0;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 800; font-size: 1.15rem; min-height: 44px; }
+    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .nav-links a {
+      display: inline-flex; align-items: center; min-height: 44px; min-width: 44px;
+      padding: 8px 14px; border-radius: 10px; color: var(--text); text-decoration: none;
+      border: 1px solid transparent; font-weight: 600;
+    }
+    .nav-links a:hover { border-color: var(--border); background: var(--surface-2); }
+    main { padding: 32px 0 64px; }
+    .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: center; }
+    @media (max-width: 820px) { .hero { grid-template-columns: 1fr; } }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 999px; font-size: 0.875rem; font-weight: 700;
+      color: var(--text);
+    }
+    .pill.s-tier { border-color: #22c55e; color: #86efac; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: 0 0 16px; font-weight: 900; }
+    .lead { font-size: 1.125rem; color: var(--muted); margin: 0 0 24px; }
+    .cmd-box {
+      background: #14110f; border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 18px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.95rem; color: #fde68a; overflow-x: auto; margin-bottom: 20px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; min-width: 48px; padding: 12px 20px; border-radius: 12px;
+      font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none;
+      border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+    }
+    .btn.primary { background: var(--amber); color: var(--amber-text); border-color: var(--amber); }
+    .hero-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px;
+    }
+    .hero-card img { width: 100%; height: auto; border-radius: 12px; display: block; border: 1px solid var(--border); }
+    .section { margin-top: 56px; }
+    .section h2 { font-size: 1.75rem; margin: 0 0 12px; }
+    .section p.sub { color: var(--muted); margin: 0 0 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .grid-4 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.05rem; color: #fbbf24; }
+    .card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.95rem; }
+    .demo-form {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+      display: grid; gap: 14px; max-width: 640px;
+    }
+    .demo-form label { font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 6px; }
+    .demo-form input {
+      width: 100%; min-height: 48px; padding: 10px 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: #14110f; color: var(--text); font-size: 1rem;
+    }
+    .status-note { font-size: 0.95rem; color: var(--green); min-height: 24px; }
+    dialog {
+      background: var(--surface); color: var(--text); border: 2px solid var(--amber);
+      border-radius: 16px; padding: 24px; max-width: 440px; width: calc(100% - 32px);
+    }
+    dialog::backdrop { background: rgba(0, 0, 0, 0.72); }
+    footer {
+      border-top: 1px solid var(--border); background: var(--surface);
+      padding: 28px 0; color: var(--muted); font-size: 0.95rem;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; }
+    .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header>
+    <div class="container nav-bar">
+      <a class="brand" href="./index.html">
+        <img src="./assets/logo.svg" alt="PawTest Optical Cat Logo" width="40" height="40" />
+        <span>PawTest v3.1</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#matrix">16-Cat Matrix</a>
+        <a href="#dogfood">S-Tier Proof</a>
+        <a href="#webmcp">WebMCP Demo</a>
+        <a href="./llms.txt">llms.txt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <div class="pill-row">
+          <span class="pill s-tier">Dogfooded: Human UX S (100)</span>
+          <span class="pill s-tier">AI Agent Readiness S (100)</span>
+          <span class="pill">$0 LLM API Cost</span>
+        </div>
+        <h1 id="hero-title">16 Pure-Code Optical Cat QA Agents for Humans &amp; Autonomous AI</h1>
+        <p class="lead">
+          One zero-dependency command audits your web app for WCAG 2.2, Core Web Vitals, leaked secrets,
+          Markdown Token-Tax, W3C WebMCP, Indirect Prompt Injection, UCP/ACP, and RFC 9421 Web Bot Auth.
+        </p>
+        <div class="cmd-box" role="region" aria-label="Quick start command">
+          npx pawtest https://your-site.com --full --share-card --gif
+        </div>
+        <div class="cta-row">
+          <a class="btn primary" href="#webmcp">Try Safe WebMCP Gate</a>
+          <a class="btn" href="./index.md">View Agent Markdown</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="./assets/social-cover-1280x640.png" alt="PawTest 16 optical cats dual-axis scorecard preview" width="1280" height="640" />
+      </div>
+    </section>
+
+    <section id="matrix" class="section" aria-labelledby="matrix-title">
+      <h2 id="matrix-title">The 4&times;4 Optical Cat Matrix</h2>
+      <p class="sub">8 fast default cats finish in seconds; add <code>--full</code> for all 16 deep probes.</p>
+      <div class="grid-4">
+        <article class="card">
+          <h3>Squad A · Human UX</h3>
+          <ul>
+            <li>A1 Marmalade: Form fuzzing &amp; XSS</li>
+            <li>A2 Zoomies: 3G &amp; click idempotency</li>
+            <li>A3 Mochi: 375px–4K &amp; 175% font</li>
+            <li>A4 Pixel: 404s, images &amp; console</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Squad B · Perf &amp; A11y</h3>
+          <ul>
+            <li>B1 Naps: Core Web Vitals</li>
+            <li>B2 Shadow: WCAG 2.2 &amp; focus trap</li>
+            <li>B3 Scout: SEO, H1 &amp; OG tags</li>
+            <li>B4 Chaos: Offline &amp; auth recovery</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Squad C · Security &amp; GEO</h3>
+          <ul>
+            <li>C1 Vault: Secret leaks &amp; CSP/HSTS</li>
+            <li>C2 RoboCat: llms.txt &amp; Token-Tax</li>
+            <li>C3 Leak: JS Heap &amp; &lt;44px targets</li>
+            <li>C4 Clever: Core flow &amp; AI SSE</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Squad D · Autonomous AI</h3>
+          <ul>
+            <li>D1 MuseBot: AXTree &amp; WebMCP</li>
+            <li>D2 Antidote: Prompt Injection scan</li>
+            <li>D3 Sentinel: Confirm gates &amp; 429</li>
+            <li>D4 Lucky: UCP, ACP &amp; RFC 9421</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="dogfood" class="section" aria-labelledby="dogfood-title">
+      <h2 id="dogfood-title">Verified Dogfooding Scorecard</h2>
+      <p class="sub">Generated locally by running PawTest <code>--full</code> against this exact page.</p>
+      <div class="hero-card">
+        <img src="./assets/pawtest-dogfood-card.png" alt="PawTest dogfood scorecard showing Human UX S 100 and AI Agent Readiness S 100" width="1200" height="630" />
+      </div>
+    </section>
+
+    <section id="webmcp" class="section" aria-labelledby="webmcp-title">
+      <h2 id="webmcp-title">WebMCP &amp; Safe Confirmation Gate Reference</h2>
+      <p class="sub">This form registers a declarative W3C WebMCP tool and enforces an explicit confirmation dialog for state-changing actions.</p>
+      <form id="audit-preview-form" class="demo-form" toolname="preview_pawtest_command" tooldescription="Generate a safe read-only PawTest CLI command for a target URL.">
+        <div>
+          <label for="target-url">Target Website URL</label>
+          <input id="target-url" name="url" type="url" maxlength="120" value="https://pawtest.dev" required />
+        </div>
+        <div class="cta-row">
+          <button type="button" id="safe-preview-btn" class="btn primary" aria-label="Generate CLI Command">Generate CLI Command</button>
+          <button type="button" id="reset-btn" class="btn" data-confirm-gate="true" aria-haspopup="dialog">Reset Demo State</button>
+        </div>
+        <div id="demo-status" class="status-note" role="status" aria-live="polite"></div>
+      </form>
+      <dialog id="confirm-dialog" aria-label="Confirm Reset">
+        <p>Confirm resetting the local PawTest demo form? No remote data is modified.</p>
+        <div class="cta-row">
+          <button type="button" id="confirm-yes" class="btn primary">Confirm Reset</button>
+          <button type="button" id="confirm-cancel" class="btn">Cancel</button>
+        </div>
+      </dialog>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>PawTest — MIT Licensed Open Source · Zero-Upload Local QA Engine</div>
+      <div class="footer-links">
+        <a href="./llms.txt">llms.txt</a>
+        <a href="./index.md">Markdown View</a>
+        <a href="./robots.txt">robots.txt</a>
+        <a href="./.well-known/ucp">UCP Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (!document.modelContext) {
+      Object.defineProperty(document, 'modelContext', {
+        value: {
+          tools: [{ name: 'preview_pawtest_command', description: 'Generate a safe read-only PawTest CLI command.' }],
+          registerTool: () => {}
+        },
+        configurable: true
+      });
+    }
+    const previewBtn = document.getElementById('safe-preview-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const urlInput = document.getElementById('target-url');
+    const statusEl = document.getElementById('demo-status');
+    const dialog = document.getElementById('confirm-dialog');
+    let busy = false;
+
+    previewBtn.addEventListener('click', () => {
+      if (busy) return;
+      busy = true;
+      previewBtn.disabled = true;
+      previewBtn.setAttribute('aria-busy', 'true');
+      const val = (urlInput.value || 'https://pawtest.dev').trim();
+      statusEl.textContent = `Ready: npx pawtest ${val} --full --share-card --gif`;
+      setTimeout(() => {
+        busy = false;
+        previewBtn.disabled = false;
+        previewBtn.removeAttribute('aria-busy');
+      }, 220);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+    });
+    document.getElementById('confirm-yes').addEventListener('click', () => {
+      urlInput.value = 'https://pawtest.dev';
+      statusEl.textContent = 'Demo state reset.';
+      dialog.close();
+    });
+    document.getElementById('confirm-cancel').addEventListener('click', () => dialog.close());
+  </script>
+</body>
+</html>

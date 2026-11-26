@@ -1,0 +1,17 @@
+{
+  "name": "PawTest QA Agent",
+  "version": "3.1.1",
+  "url": "https://pawtest.dev",
+  "description": "16 pure-code optical cat QA probes auditing Human UX and AI Agent Readiness.",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "skills": [
+    {
+      "id": "pawtest_audit",
+      "name": "Dual-Axis Human & AI Agent QA Audit",
+      "description": "Audit any URL for Human UX (0-100) and AI Agent Readiness (0-100)."
+    }
+  ]
+}

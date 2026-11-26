@@ -1,0 +1,137 @@
+{
+  "tool": "pawtest-diff",
+  "version": "3.1.1",
+  "timestamp": "2026-11-26T04:56:32.574Z",
+  "winner": "A",
+  "siteA": {
+    "url": "https://vercel.com/",
+    "human": {
+      "score": 93,
+      "grade": "A",
+      "catsRun": 5,
+      "criticalCount": 0,
+      "highCount": 2
+    },
+    "agent": {
+      "score": 91,
+      "grade": "A",
+      "catsRun": 4,
+      "criticalCount": 0,
+      "highCount": 1
+    },
+    "tokenTax": {
+      "rawHtmlTokens": 150594,
+      "cleanTokens": 3825,
+      "bloatRatio": 39.37,
+      "supportsMarkdown": true,
+      "tokenSavingsPct": 97
+    },
+    "survivalPct": 30,
+    "compoundRisks": 0
+  },
+  "siteB": {
+    "url": "https://airbnb.com/",
+    "human": {
+      "score": 79,
+      "grade": "B",
+      "catsRun": 5,
+      "criticalCount": 0,
+      "highCount": 0
+    },
+    "agent": {
+      "score": 76,
+      "grade": "B",
+      "catsRun": 4,
+      "criticalCount": 0,
+      "highCount": 1
+    },
+    "tokenTax": {
+      "rawHtmlTokens": 155247,
+      "cleanTokens": 131,
+      "bloatRatio": 1185.09,
+      "supportsMarkdown": false,
+      "tokenSavingsPct": 0
+    },
+    "survivalPct": 38,
+    "compoundRisks": 0
+  },
+  "deltas": {
+    "human": 14,
+    "agent": 15,
+    "combined": 29
+  },
+  "catComparison": [
+    {
+      "catId": "marmalade",
+      "code": "A1",
+      "name": "Marmalade",
+      "axis": "human",
+      "scoreA": 100,
+      "scoreB": 96,
+      "delta": 4
+    },
+    {
+      "catId": "zoomies",
+      "code": "A2",
+      "name": "Zoomies",
+      "axis": "human",
+      "scoreA": 100,
+      "scoreB": 100,
+      "delta": 0
+    },
+    {
+      "catId": "mochi",
+      "code": "A3",
+      "name": "Mochi",
+      "axis": "human",
+      "scoreA": 82,
+      "scoreB": 100,
+      "delta": -18
+    },
+    {
+      "catId": "pixel",
+      "code": "A4",
+      "name": "Pixel",
+      "axis": "human",
+      "scoreA": 82,
+      "scoreB": 50,
+      "delta": 32
+    },
+    {
+      "catId": "vault",
+      "code": "C1",
+      "name": "Vault",
+      "axis": "dual",
+      "scoreA": 100,
+      "scoreB": 50,
+      "delta": 50
+    },
+    {
+      "catId": "robocat",
+      "code": "C2",
+      "name": "RoboCat",
+      "axis": "agent",
+      "scoreA": 100,
+      "scoreB": 82,
+      "delta": 18
+    },
+    {
+      "catId": "musebot",
+      "code": "D1",
+      "name": "MuseBot",
+      "axis": "agent",
+      "scoreA": 64,
+      "scoreB": 73,
+      "delta": -9
+    },
+    {
+      "catId": "antidote",
+      "code": "D2",
+      "name": "Antidote",
+      "axis": "agent",
+      "scoreA": 100,
+      "scoreB": 100,
+      "delta": 0
+    }
+  ]
+}

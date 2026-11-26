@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>PawTest — 16 Pure-Code Faceted Crystal Origami QA Cats</title><style>:root{--bg:#070606;--p:#110f0e;--p2:#191614;--b:rgba(255,248,238,.12);--t:#faf5ee;--m:#9c9288;--a:#e7cfa0}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column}header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:11px 22px;background:var(--p);border-bottom:1px solid var(--b)}.br{display:flex;align-items:center;gap:11px}.lg{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#e7cfa0,#c9a96e,#6d28d9);color:#0a0908;font-weight:900;display:grid;place-items:center;font-size:14px}.br h1{font-size:15px;font-weight:700;letter-spacing:.04em}.br p{font-size:11px;color:var(--m)}.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.btn{background:var(--p2);color:var(--t);border:1px solid var(--b);padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}.btn:hover{border-color:var(--a)}.btn.pri{background:var(--a);color:#0a0908;border-color:var(--a)}.lay{flex:1;display:grid;grid-template-columns:1fr 350px;min-height:0}@media(max-width:960px){.lay{grid-template-columns:1fr}}.sw{position:relative;background:#070606;min-height:540px;overflow:hidden;cursor:grab}.sw:active{cursor:grabbing}#glCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.hud{position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;gap:10px}.pill{pointer-events:auto;background:rgba(12,11,10,.82);border:1px solid var(--b);border-radius:11px;padding:9px 14px;display:flex;gap:18px;align-items:center}.si .k{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-family:monospace}.si .v{font-size:18px;font-weight:700;margin-top:2px;font-family:Georgia,serif}.plaque{position:absolute;bottom:18px;left:18px;background:rgba(12,11,10,.82);border:1px solid var(--b);border-radius:12px;padding:14px 18px;max-width:480px;width:calc(100% - 36px)}.plaque .w{font-size:11px;font-weight:700;color:var(--a);letter-spacing:.08em;text-transform:uppercase;font-family:monospace}.plaque .nm{font-size:26px;font-weight:300;font-family:Georgia,serif;margin:4px 0}.plaque .l{font-size:13px;color:#cfc6bc;line-height:1.45}aside{background:var(--p);border-left:1px solid var(--b);padding:14px;overflow-y:auto;max-height:calc(100vh - 58px)}.sq{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--m);margin:10px 0 6px;font-weight:700;font-family:monospace}.cg{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cc{background:var(--p2);border:1px solid var(--b);border-radius:9px;padding:8px 9px;cursor:pointer;}.cc:hover{border-color:rgba(231,207,160,.45)}.cc.on{border-color:var(--a);background:#211c17}.cc .r{display:flex;align-items:center;justify-content:space-between;gap:5px}.cc .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}.cc .nm{font-size:12px;font-weight:700;flex:1}.cc .st{font-size:11px;font-weight:700;font-family:monospace}.cc .pr{font-size:10px;color:var(--m);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}</style></head><body><header><div class="br"><div class="lg">16</div><div><h1>PAWTEST · FACETED CRYSTAL ORIGAMI STAGE</h1><p>100% Pure-Code WebGL2 Flat-Facet PBR · Planar Mirror · Drag to Orbit</p></div></div><div class="bar"><button class="btn pri" id="btnSimulate">Parade 16 Cats</button><label class="btn">Load report.json<input type="file" id="fileReport" accept=".json" style="display:none"/></label><span id="renderBadge" style="font-size:11px;color:var(--m);font-family:monospace">WebGL2</span></div></header><div class="lay"><div class="sw" id="stageWrap"><canvas id="glCanvas"></canvas><div class="hud"><div class="pill"><div class="si"><div class="k">Human UX</div><div class="v" id="humanScore" style="color:#4ade80">S · 100</div></div><div class="si"><div class="k">AI Agent</div><div class="v" id="agentScore" style="color:#c4b5fd">S · 100</div></div><div class="si"><div class="k">Token-Tax</div><div class="v" id="tokenTaxHud" style="color:#e7cfa0;font-size:15px">—</div></div></div><div class="pill"><div class="si"><div class="k">Sculpture</div><div class="v" id="selectedMeta" style="font-size:14px">D4 · Lucky</div></div></div></div><div class="plaque"><div class="w" id="speechWho">D4 · VOLCANIC OBSIDIAN · 24K KINTSUGI GOLD</div><div class="nm" id="speechName">Lucky</div><div class="l" id="speechLine">Click any of the 16 faceted crystal origami cats or load report.json to inspect live verdicts.</div></div></div><aside id="catList"></aside></div><script>
+(()=>{
+const C=[
+['marmalade','A1','Marmalade','A','Human',3,[.42,.14,.03],[1,.70,.26],[1,.82,.42],'Smoked Cognac Baccarat','Fuzzing forms for XSS & 500-emoji crashes.'],
+['zoomies','A2','Zoomies','A','Human',1,[.06,.14,.42],[.42,.74,1],[.65,.88,1],'Cobalt Optical Crystal','Spam-clicking on 3G for double-charge & deadlocks.'],
+['mochi','A3','Mochi','A','Human',0,[.24,.18,.20],[.98,.76,.82],[1,.86,.90],'Sakura Alabaster · Rose Gold','Testing 375px–4K responsive & CTA occlusion.'],
+['pixel','A4','Pixel','A','Human',1,[.16,.24,.30],[.98,.32,.34],[1,.45,.45],'Borosilicate · Ruby Laser','Hunting 404 dead links, broken images & 500s.'],
+['naps','B1','Naps','B','Human',3,[.36,.28,.10],[.96,.84,.48],[1,.90,.60],'Champagne Frosted Crystal','Measuring Core Web Vitals (LCP / CLS / INP).'],
+['shadow','B2','Shadow','B','Human',0,[.02,.03,.035],[.18,.90,.80],[.35,1,.92],'Volcanic Basalt · Teal Seam','Auditing WCAG 2.2 contrast & keyboard focus traps.'],
+['scout','B3','Scout','B','Human',0,[.16,.18,.21],[.88,.92,.98],[.95,.98,1],'Brushed Anodized Titanium','Verifying H1 hierarchy, canonical & Open Graph.'],
+['chaos','B4','Chaos','B','Human',3,[.34,.05,.10],[.98,.38,.48],[1,.55,.65],'Smoked Burgundy Crystal','Simulating offline drop & cookie-clear recovery.'],
+['vault','C1','Vault','C','Dual',1,[.025,.24,.17],[.94,.76,.34],[1,.84,.40],'Emerald Crystal · Brass Core','Sniffing JS & sourcemaps for leaked keys & CSP.'],
+['robocat','C2','RoboCat','C','Agent',2,[.06,.34,.42],[.38,.94,1],[.55,1,1],'Dichroic Cyan Prism','Auditing RFC 9309, Content-Signal & Token-Tax.'],
+['leak','C3','Leak','C','Human',3,[.24,.08,.40],[.82,.60,1],[.90,.74,1],'Smoked Amethyst Crystal','Tracking JS Heap leaks & <44px touch targets.'],
+['clever','C4','Clever','C','Dual',0,[.20,.22,.26],[.54,.78,1],[.74,.88,1],'Satin Porcelain · Sapphire','Testing core user flows & embedded AI SSE.'],
+['musebot','D1','MuseBot','D','Agent',2,[.18,.11,.52],[.76,.88,1],[.58,.96,1],'Ultraviolet Dichroic Origami','Penetrating Shadow DOM CTAs, Price Parity & WebMCP.'],
+['antidote','D2','Antidote','D','Agent',1,[.14,.28,.18],[.68,1,.38],[.78,1,.50],'Ice Quartz · UV Lime Core','Scanning hidden DOM & Unicode Tags for PI.'],
+['sentinel','D3','Sentinel','D','Agent',0,[.05,.055,.065],[.98,.36,.20],[1,.50,.32],'Gunmetal Obsidian · Vermilion','Verifying CONFIRM? gates & dynamic 429 limits.'],
+['lucky','D4','Lucky','D','Agent',0,[.025,.024,.028],[.98,.78,.30],[1,.82,.36],'Volcanic Obsidian · 24K Kintsugi','Auditing /.well-known/ matrix, WAF & RFC 9421.']
+].map(([id,code,name,squad,axis,style,base,edge,eye,craft,quip])=>({id,code,name,squad,axis,style,base,edge,eye,craft,quip}));
+const $=id=>document.getElementById(id),glC=$('glCanvas'),sw=$('stageWrap');
+let sel=15,rm={},yaw=-.42,pit=.16,dr=0,lx=0,ly=0,spinBoost=0;
+function renderSide(){
+const qs=[['A','Squad A · Human UX'],['B','Squad B · Perf / WCAG / SEO'],['C','Squad C · Security & GEO'],['D','Squad D · Autonomous AI']];
+$('catList').innerHTML=qs.map(([s,t])=>`<div class="sq">${t}</div><div class="cg">`+C.map((c,i)=>({c,i})).filter(x=>x.c.squad===s).map(({c,i})=>{
+const r=rm[c.id],sc=!r?'#9c9288':r.status==='pass'?'#4ade80':r.status==='warn'?'#fbbf24':'#f87171',hex=`rgb(${c.edge.map(v=>Math.round(v*255))})`;
+return `<div class="cc ${i===sel?'on':''}" data-i="${i}"><div class="r"><span class="dot" style="background:${hex}"></span><span class="nm">${c.code} ${c.name}</span><span class="st" style="color:${sc}">${r?r.score:c.axis}</span></div><div class="pr">${c.craft}</div></div>`;
+}).join('')+'</div>').join('');
+$('catList').querySelectorAll('.cc').forEach(e=>e.onclick=()=>pick(+e.dataset.i));
+}
+function pick(i){
+sel=i;spinBoost=.18;const c=C[i],r=rm[c.id];
+$('selectedMeta').textContent=`${c.code} · ${c.name}`;
+$('speechWho').textContent=`${c.code} · ${c.craft.toUpperCase()}`;
+$('speechName').textContent=c.name;
+$('speechLine').textContent=r&&r.quips&&r.quips[0]?r.quips[0]:c.quip;
+renderSide();
+}
+sw.onpointerdown=e=>{dr=1;lx=e.clientX;ly=e.clientY};
+onpointerup=()=>dr=0;
+onpointermove=e=>{if(!dr)return;yaw+=(e.clientX-lx)*.01;pit=Math.max(-.25,Math.min(.55,pit+(e.clientY-ly)*.007));lx=e.clientX;ly=e.clientY};
+sw.onclick=()=>spinBoost=.22;
+$('fileReport').onchange=async e=>{const f=e.target.files?.[0];if(f)apply(JSON.parse(await f.text()))};
+function apply(d){
+rm={};(d.cats||[]).forEach(c=>rm[c.catId]=c);
+if(d.scores){
+$('humanScore').textContent=`${d.scores.human.grade} · ${d.scores.human.score}`;
+$('agentScore').textContent=`${d.scores.agent.grade} · ${d.scores.agent.score}`;
+if(d.tokenTax)$('tokenTaxHud').textContent=`${d.tokenTax.bloatRatio}x · MD ${d.tokenTax.supportsMarkdown?'ON':'OFF'}`;
+}
+const fi=C.findIndex(c=>rm[c.id]?.status==='fail');pick(fi>=0?fi:15);
+}
+$('btnSimulate').onclick=()=>{let k=0,tm=setInterval(()=>{pick(k++%C.length);if(k>=C.length)clearInterval(tm)},550)};
+function buildCat(){
+const pos=[],bary=[],part=[];
+const tri=(a,b,c,p=0)=>{pos.push(...a,...b,...c);bary.push(1,0,0,0,1,0,0,0,1);part.push(p,p,p)};
+const quad=(a,b,c,d,p=0,f=0)=>f?(tri(a,b,d,p),tri(b,c,d,p)):(tri(a,b,c,p),tri(a,c,d,p));
+const ring=(y,z,rx,rf,rb,tw=0)=>Array.from({length:8},(_,i)=>{const a=i*.785398+tw,cz=Math.cos(a);return[Math.sin(a)*rx,y,z+cz*(cz>=0?rf:rb)]});
+const R=[ring(0,-.02,.34,.30,.36,0),ring(.20,-.06,.42,.28,.44,.14),ring(.46,-.05,.32,.27,.34,0),ring(.74,.02,.24,.24,.21,.14),ring(.96,.07,.16,.16,.15,0),ring(1.16,.11,.125,.135,.125,0)];
+for(let r=0;r<R.length-1;r++)for(let i=0;i<8;i++)quad(R[r][i],R[r][(i+1)%8],R[r+1][(i+1)%8],R[r+1][i],0,(r+i)%2);
+const hz=.14,hy=1.15,H={ch:[0,hy+.02,hz+.28],nt:[0,hy+.13,hz+.35],nb:[0,hy+.22,hz+.25],fh:[0,hy+.34,hz+.12],cr:[0,hy+.37,hz-.04],oc:[0,hy+.22,hz-.22],np:[0,hy+.01,hz-.14],th:[0,hy-.02,hz+.12],mz:[.085,hy+.09,hz+.26],jw:[.115,hy+.03,hz+.15],ck:[.245,hy+.14,hz+.08],br:[.145,hy+.26,hz+.17],tp:[.215,hy+.29,hz-.02],bh:[.165,hy+.16,hz-.16],ei:[.056,hy+.174,hz+.248],et:[.118,hy+.216,hz+.208],eo:[.18,hy+.194,hz+.158],eb:[.115,hy+.152,hz+.215],e1:[.082,hy+.35,hz+.04],e2:[.232,hy+.26,hz-.01],e3:[.165,hy+.30,hz-.14],ep:[.212,hy+.61,hz-.03],ec:[.154,hy+.39,hz+.035]};
+for(const s of[1,-1]){
+const m=v=>s>0?v:[-v[0],v[1],v[2]],T=(a,b,c,p=0)=>s>0?tri(m(a),m(b),m(c),p):tri(m(a),m(c),m(b),p);
+[[H.nt,H.mz,H.ch],[H.nt,H.ei,H.mz],[H.nt,H.nb,H.ei],[H.ch,H.mz,H.jw],[H.ch,H.jw,H.th],[H.nb,H.fh,H.br],[H.nb,H.br,H.ei],[H.ei,H.br,H.et],[H.br,H.tp,H.eo],[H.br,H.eo,H.et],[H.fh,H.cr,H.tp],[H.fh,H.tp,H.br],[H.mz,H.eb,H.ck],[H.mz,H.ei,H.eb],[H.eb,H.eo,H.ck],[H.mz,H.ck,H.jw],[H.ck,H.eo,H.tp],[H.ck,H.tp,H.bh],[H.ck,H.bh,H.jw],[H.cr,H.oc,H.tp],[H.tp,H.oc,H.bh],[H.bh,H.oc,H.np],[H.jw,H.bh,H.np],[H.jw,H.np,H.th],[H.ei,H.et,H.eo,2],[H.ei,H.eo,H.eb,2],[H.e1,H.ep,H.e3],[H.e3,H.ep,H.e2],[H.e1,H.ec,H.ep,1],[H.ec,H.e2,H.ep,1],[H.e1,H.e2,H.ec,1]].forEach(x=>T(...x));
+}
+for(const s of[1,-1]){const x=.13*s,pr=[[[x-.055,0,.40],[x+.055,0,.40],[x+.065,0,.22],[x-.065,0,.22]],[[x-.048,.08,.36],[x+.048,.08,.36],[x+.062,.11,.20],[x-.062,.11,.20]],[[x-.055,.50,.22],[x+.055,.50,.22],[x+.065,.50,.10],[x-.065,.50,.10]]];for(let r=0;r<2;r++)for(let i=0;i<4;i++)quad(pr[r][i],pr[r][(i+1)%4],pr[r+1][(i+1)%4],pr[r+1][i])}
+const tp=[[0,.10,-.36,.072],[.24,.06,-.38,.062],[.44,.05,-.20,.054],[.49,.05,.08,.045],[.40,.07,.28,.036],[.31,.14,.34,.022]].map(([x,y,z,r])=>[[x,y+r,z],[x+r,y,z],[x,Math.max(0,y-r),z],[x-r,y,z]]);
+for(let i=0;i<tp.length-1;i++)for(let k=0;k<4;k++)quad(tp[i][k],tp[i][(k+1)%4],tp[i+1][(k+1)%4],tp[i+1][k]);
+for(let k=0;k<4;k++)tri(tp[5][k],tp[5][(k+1)%4],[.27,.20,.36]);
+return{pos:new Float32Array(pos),bary:new Float32Array(bary),part:new Float32Array(part),n:pos.length/3};
+}
+function buildHalo(){
+const pos=[],bary=[],part=[];
+for(let i=0;i<64;i++){const a0=i*.09817,a1=(i+1)*.09817,R=.78,w=.007,p=(a,o)=>[Math.cos(a)*(R+o),.66+Math.sin(a)*.26+o,Math.sin(a)*(R+o)];pos.push(...p(a0,0),...p(a1,0),...p(a1,w),...p(a0,0),...p(a1,w),...p(a0,w));bary.push(1,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,1);part.push(4,4,4,4,4,4)}
+return{pos:new Float32Array(pos),bary:new Float32Array(bary),part:new Float32Array(part),n:pos.length/3};
+}
+const floorGeo={pos:new Float32Array([-10,0,-10,10,0,-10,10,0,10,-10,0,-10,10,0,10,-10,0,10]),bary:new Float32Array([1,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,1]),part:new Float32Array([5,5,5,5,5,5]),n:6};
+const mMul=(a,b)=>{const o=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++)o[j*4+i]=a[i]*b[j*4]+a[4+i]*b[j*4+1]+a[8+i]*b[j*4+2]+a[12+i]*b[j*4+3];return o};
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],crs=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],nrm=a=>{const l=Math.hypot(...a)||1;return[a[0]/l,a[1]/l,a[2]/l]};
+const persp=(f,a,n,fa)=>{const k=1/Math.tan(f/2),nf=1/(n-fa);return new Float32Array([k/a,0,0,0,0,k,0,0,0,0,(fa+n)*nf,-1,0,0,2*fa*n*nf,0])};
+const look=(e,t)=>{const z=nrm([e[0]-t[0],e[1]-t[1],e[2]-t[2]]),x=nrm(crs([0,1,0],z)),y=crs(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,e),-dot(y,e),-dot(z,e),1])};
+const mRot=(y,my=0)=>{const c=Math.cos(y),s=Math.sin(y);return new Float32Array([c,0,-s,0,0,my?-1:1,0,0,s,0,c,0,0,0,0,1])};
+const gl=glC.getContext('webgl2',{antialias:true,depth:true,alpha:false});
+$('renderBadge').textContent=gl?'WebGL2 Facet PBR':'No WebGL2';
+let prog=null,U={},catM=null,haloM=null,flM=null;
+if(gl){
+const vs=`#version 300 es\nin vec3 aP,aB;in float aT;uniform mat4 uM,uV;out vec3 vW,vB;out float vT;void main(){vec4 w=uM*vec4(aP,1.);vW=w.xyz;vB=aB;vT=aT;gl_Position=uV*w;}`;
+const fs=`#version 300 es
+precision highp float;in vec3 vW,vB;in float vT;out vec4 O;
+uniform vec3 uC,uB,uE,uY;uniform int uS;uniform float uA,uT;
+vec3 env(vec3 d){vec3 c=mix(vec3(.012,.011,.011),vec3(.042,.038,.036),smoothstep(-.2,.85,d.y));c+=vec3(2.8,2.6,2.3)*smoothstep(.74,.95,dot(d,normalize(vec3(.38,.86,.34))));c+=mix(vec3(.55,.72,1.),uE,.7)*smoothstep(.7,.95,dot(d,normalize(vec3(-.82,.34,-.46))))*1.8;c+=uE*smoothstep(.8,.97,dot(d,normalize(vec3(.72,.16,-.66))));return c;}
+vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
+void main(){
+vec3 N=normalize(cross(dFdx(vW),dFdy(vW))),V=normalize(uC-vW);if(dot(N,V)<0.)N=-N;float ndv=max(dot(N,V),0.);
+vec3 fw=fwidth(vB),a3=smoothstep(vec3(0.),fw*1.35,vB);float el=1.-min(min(a3.x,a3.y),a3.z);
+if(vT>4.5){float r=length(vW.xz),ao=smoothstep(.14,.72,r),cs=exp(-r*r*1.6)*(.65+.35*sin(vW.x*14.+uT)*cos(vW.z*14.));vec3 fl=vec3(.015,.014,.014)*(.2+.8*ao)+uE*cs*.12;O=vec4(pow(aces(fl*exp(-r*r*.18)),vec3(.4545)),mix(.62,1.,clamp(r*.42,0.,1.)));return;}
+if(vT>3.5){O=vec4(pow(aces(uE*1.45),vec3(.4545)),uA);return;}
+if(vT>1.5&&vT<2.5){O=vec4(pow(aces(uY*(.65+1.45*pow(1.-ndv,1.6))+pow(ndv,16.)),vec3(.4545)),uA);return;}
+vec3 L1=normalize(vec3(.45,.85,.4)),L2=normalize(vec3(-.78,.35,-.52)),er=env(reflect(-V,N));
+float d1=max(dot(N,L1),0.),d2=max(dot(N,L2),0.),sp=pow(max(dot(reflect(-L1,N),V),0.),80.),fr=pow(1.-ndv,3.8),cg=exp(-dot(vW-vec3(0.,.56,.04),vW-vec3(0.,.56,.04))*7.5);
+vec3 col;
+if(uS==0){vec3 st=uB*(.45+1.15*d1+.35*d2)+er*(.06+.42*fr)+vec3(1.,.96,.88)*sp*.48;float km=smoothstep(.18,.88,el)*(.55+.45*sin(vW.y*10.+vW.x*8.));col=mix(st,uE*(.95+1.35*d1)+er*uE*.85+vec3(1.,.96,.78)*sp*1.5,km*.92);if(vT>.5&&vT<1.5)col=mix(col,uE*.95,.55);}
+else if(uS==1){col=uB*(.35+.85*d1)+er*(.2+.85*fr)+uE*cg*1.25+uE*el*.65+vec3(1.,.97,.88)*sp*1.5;}
+else if(uS==2){vec3 ir=.5+.5*cos(6.2831*(ndv*.8+d1*.3+vec3(0.,.33,.67)));col=mix(uB,ir,.52)*(.32+.65*d1)+er*mix(uE,ir,.55)*(.24+.88*fr)+mix(uE,ir,.5)*el*.78+sp*1.6;}
+else{col=mix(uB,uE,pow(1.-ndv,1.9)*.72)*(.35+.85*d1)+er*(.2+.82*fr)+uE*cg*.65+uE*el*.72+vec3(1.,.94,.84)*sp*1.55;}
+O=vec4(pow(aces(col),vec3(.4545)),uA);
+}`;
+const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh};
+prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);
+const up=g=>{const v=gl.createVertexArray();gl.bindVertexArray(v);const b=(n,d,s)=>{const bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);gl.bufferData(gl.ARRAY_BUFFER,d,gl.STATIC_DRAW);const l=gl.getAttribLocation(prog,n);gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,s,gl.FLOAT,false,0,0)};b('aP',g.pos,3);b('aB',g.bary,3);b('aT',g.part,1);return{v,n:g.n}};
+catM=up(buildCat());haloM=up(buildHalo());flM=up(floorGeo);
+['uM','uV','uC','uB','uE','uY','uS','uA','uT'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
+}
+function rsz(){const r=sw.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);glC.width=Math.max(1,Math.floor(r.width*d));glC.height=Math.max(1,Math.floor(r.height*d))}
+onresize=rsz;rsz();renderSide();pick(15);
+if(location.protocol.startsWith('http')){try{const es=new EventSource('/events');es.addEventListener('cat-complete',e=>{const r=JSON.parse(e.data);rm[r.catId]=r;const i=C.findIndex(c=>c.id===r.catId);if(i>=0)pick(i)});es.addEventListener('audit-complete',e=>apply(JSON.parse(e.data)))}catch{}}
+(function loop(now){
+const t=now*.001;if(!dr)yaw+=.005+spinBoost;spinBoost*=.92;
+if(gl&&prog){
+const c=C[sel];gl.viewport(0,0,glC.width,glC.height);gl.clearColor(.024,.022,.022,1);gl.clearDepth(1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+gl.useProgram(prog);
+const eye=[3.6*Math.sin(.18),1.4+pit*1.8,3.6*Math.cos(.18)],vp=mMul(persp(.58,glC.width/glC.height,.1,30),look(eye,[0,.78,0]));
+gl.uniform3fv(U.uC,eye);gl.uniform3fv(U.uB,c.base);gl.uniform3fv(U.uE,c.edge);gl.uniform3fv(U.uY,c.eye);gl.uniform1i(U.uS,c.style);gl.uniform1f(U.uT,t);
+const draw=(m,mesh)=>{gl.uniformMatrix4fv(U.uM,false,m);gl.uniformMatrix4fv(U.uV,false,mMul(vp,m));gl.bindVertexArray(mesh.v);gl.drawArrays(gl.TRIANGLES,0,mesh.n)};
+gl.disable(gl.BLEND);gl.enable(gl.DEPTH_TEST);gl.depthMask(true);gl.uniform1f(U.uA,1);draw(mRot(yaw,1),catM);draw(mRot(yaw,1),haloM);
+gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.disable(gl.DEPTH_TEST);gl.depthMask(false);draw(mRot(0,0),flM);
+gl.disable(gl.BLEND);gl.enable(gl.DEPTH_TEST);gl.depthMask(true);gl.clear(gl.DEPTH_BUFFER_BIT);gl.uniform1f(U.uA,1);draw(mRot(yaw,0),catM);draw(mRot(yaw,0),haloM);
+}
+requestAnimationFrame(loop);
+})(0);
+})();
+</script>
+</body>
+</html>

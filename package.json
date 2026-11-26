@@ -1,0 +1,62 @@
+{
+  "name": "pawtest",
+  "version": "3.1.1",
+  "description": "16 pure-code 3D optical cat QA agents auditing both Human UX and AI Agent Readiness (W3C document.modelContext WebMCP, Markdown for Agents Token-Tax, UCP/ACP/AP2, RFC 9421 Web Bot Auth, Prompt Injection) at $0 API cost.",
+  "type": "module",
+  "bin": {
+    "pawtest": "./bin/pawtest.mjs"
+  },
+  "main": "./src/engine/runner.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/engine/runner.js"
+    },
+    "./cats": "./src/cats/index.js",
+    "./mcp": "./src/mcp/server.js"
+  },
+  "scripts": {
+    "start": "node ./bin/pawtest.mjs",
+    "mcp": "node ./src/mcp/server.js",
+    "test": "node --test test/unit.test.mjs test/e2e.test.mjs test/sota-pillars.test.mjs test/v24-dx-upgrades.test.mjs test/v30-performance-enterprise.test.mjs test/v31-breakthroughs.test.mjs",
+    "test:unit": "node --test test/unit.test.mjs",
+    "test:e2e": "node --test test/e2e.test.mjs",
+    "verify:mcp": "node ./scripts/verify-mcp-e2e.mjs",
+    "dogfood": "node ./scripts/dogfood-site.mjs",
+    "stress:real": "node ./scripts/stress-test-5-sites.mjs",
+    "assets:launch": "node ./scripts/generate-launch-assets.mjs",
+    "typecheck": "tsc --noEmit",
+    "benchmark:top20": "node ./scripts/generate-leaderboard.mjs"
+  },
+  "keywords": [
+    "qa",
+    "testing",
+    "ai-agent",
+    "webmcp",
+    "markdown-for-agents",
+    "ucp",
+    "acp",
+    "web-bot-auth",
+    "rfc9421",
+    "mcp-server",
+    "prompt-injection",
+    "accessibility",
+    "webgl2",
+    "cdp"
+  ],
+  "author": "PawTest Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "types/",
+    "action.yml",
+    "README.md",
+    "CONTRIBUTING_A_CAT.md",
+    "LICENSE"
+  ]
+}

@@ -1,0 +1,51 @@
+name: PawTest Cross-Platform CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }} / Node 22)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify Browser & Stage Budget (<20 KB)
+        shell: bash
+        run: |
+          STAGE_BYTES=$(wc -c < src/ui/stage.html | tr -d ' ')
+          echo "src/ui/stage.html size: ${STAGE_BYTES} bytes"
+          if [ "$STAGE_BYTES" -gt 20480 ]; then
+            echo "::error::stage.html exceeds 20 KB budget (${STAGE_BYTES} bytes)"
+            exit 1
+          fi
+
+      - name: Run Unit & End-to-End 16-Cat Tests
+        run: npm test
+
+      - name: Run IDE MCP Closed-Loop Verification
+        run: npm run verify:mcp
+
+      - name: Dogfood Official Site (Expect Human S / AI Agent S)
+        run: npm run dogfood
+
+  typecheck:
+    name: TypeScript JSDoc Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run TypeScript 5.8 Check
+        run: npx --yes typescript@5.8 tsc --noEmit

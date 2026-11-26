@@ -1,0 +1,10 @@
+{
+  "protocol": "acp",
+  "version": "2026-11",
+  "provider": "PawTest Open Source",
+  "web_bot_auth": {
+    "rfc9421": true,
+    "signature_agent_header": "Signature-Agent"
+  },
+  "confirmation_policy": "explicit_user_gate_required"
+}

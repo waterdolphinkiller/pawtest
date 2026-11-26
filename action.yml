@@ -1,0 +1,93 @@
+name: 'PawTest Dual-Axis QA Gate'
+description: 'Run 16 pure-code optical QA cats against a preview URL and post Human UX × AI Agent Readiness scores on Pull Requests.'
+branding:
+  icon: 'shield'
+  color: 'orange'
+
+inputs:
+  url:
+    description: 'Target preview or staging URL to audit (http:// or https://)'
+    required: true
+  full:
+    description: 'Run all 16 cats instead of default 8 fast cats'
+    required: false
+    default: 'false'
+  cats:
+    description: 'Optional comma-separated list of specific cat IDs (e.g. vault,musebot,lucky)'
+    required: false
+    default: ''
+  share-card:
+    description: 'Export 1200x630 PNG scorecard artifact'
+    required: false
+    default: 'true'
+  failure-gif:
+    description: 'Export 5-second annotated crime-scene failure replay GIF'
+    required: false
+    default: 'false'
+  sarif:
+    description: 'Export SARIF 2.1.0 report for GitHub Code Scanning'
+    required: false
+    default: 'false'
+  comment-pr:
+    description: 'Post dual-axis Markdown report as a PR comment'
+    required: false
+    default: 'true'
+
+outputs:
+  report-json:
+    description: 'Path to sanitized report.json'
+    value: ${{ steps.run-pawtest.outputs.report_json }}
+  report-md:
+    description: 'Path to Markdown report'
+    value: ${{ steps.run-pawtest.outputs.report_md }}
+  sarif-file:
+    description: 'Path to pawtest.sarif (when sarif=true)'
+    value: ${{ steps.run-pawtest.outputs.sarif_file }}
+  fix-prompt:
+    description: 'Path to fix-prompt.md'
+    value: ${{ steps.run-pawtest.outputs.fix_prompt }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run PawTest Audit
+      id: run-pawtest
+      shell: bash
+      run: |
+        ARGS=("${{ inputs.url }}" "--out" "./pawtest-report" "--block-localhost")
+        if [ "${{ inputs.full }}" = "true" ]; then ARGS+=("--full"); fi
+        if [ -n "${{ inputs.cats }}" ]; then ARGS+=("--cat" "${{ inputs.cats }}"); fi
+        if [ "${{ inputs.share-card }}" = "true" ]; then ARGS+=("--share-card"); fi
+        if [ "${{ inputs.failure-gif }}" = "true" ]; then ARGS+=("--gif"); fi
+        if [ "${{ inputs.sarif }}" = "true" ]; then ARGS+=("--sarif"); fi
+        set +e
+        node "${{ github.action_path }}/bin/pawtest.mjs" "${ARGS[@]}"
+        EXIT_CODE=$?
+        set -e
+        echo "report_json=./pawtest-report/report.json" >> $GITHUB_OUTPUT
+        echo "report_md=./pawtest-report/report.md" >> $GITHUB_OUTPUT
+        echo "fix_prompt=./pawtest-report/fix-prompt.md" >> $GITHUB_OUTPUT
+        echo "sarif_file=./pawtest-report/pawtest.sarif" >> $GITHUB_OUTPUT
+        echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+    - name: Comment Dual-Axis Scorecard on PR
+      if: inputs.comment-pr == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const body = fs.readFileSync('./pawtest-report/report.md', 'utf8');
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body
+          });
+
+    - name: Fail CI on Critical Defects
+      shell: bash
+      run: |
+        if [ "${{ steps.run-pawtest.outputs.exit_code }}" = "2" ]; then
+          echo "PawTest detected critical Human UX or AI Agent Readiness defects."
+          exit 1
+        fi
