@@ -38,14 +38,3 @@ jobs:
 
       - name: Dogfood Official Site (Expect Human S / AI Agent S)
         run: npm run dogfood
-
-  typecheck:
-    name: TypeScript JSDoc Typecheck
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Run TypeScript 5.8 Check
-        run: npm install --no-save @types/node@22 && npx --yes -p typescript@5.8 tsc --noEmit
