@@ -115,7 +115,16 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { font-size: 16px; scroll-behavior: smooth; background: var(--bg); }
+    html {
+      font-size: 16px; scroll-behavior: smooth; background: var(--bg);
+      color-scheme: dark;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(214, 184, 122, 0.28) #070708;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #070708; }
+    ::-webkit-scrollbar-thumb { background: rgba(214, 184, 122, 0.28); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(214, 184, 122, 0.55); }
     body {
       margin: 0;
       background:
@@ -313,8 +322,8 @@
       padding: 10px 12px 10px 16px;
     }
     .cmd-code {
-      font-family: var(--mono); font-size: 0.88rem; color: var(--gold-bright);
-      overflow-x: auto; white-space: nowrap; flex: 1;
+      font-family: var(--mono); font-size: 0.84rem; line-height: 1.5; color: var(--gold-bright);
+      white-space: normal; word-break: break-word; overflow-wrap: anywhere; flex: 1;
       transition: opacity 0.2s var(--ease);
     }
     .cmd-prompt { color: var(--ink-muted); margin-right: 8px; user-select: none; }
