@@ -1,276 +1,1133 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PawTest — 16 Pure-Code Optical Cat QA Agents for Humans &amp; AI Agents</title>
-  <meta name="description" content="Zero-config, $0 API cost CLI &amp; MCP Server that audits both Human UX (0-100) and AI Agent Readiness (0-100) across 16 deterministic browser probes." />
-  <link rel="canonical" href="https://pawtest.dev/" />
+  <title>PawTest — Free Website QA &amp; AI Agent Readiness Audit CLI</title>
+  <meta name="description" content="Audit any website for Human UX (WCAG 2.2, Core Web Vitals, leaks) and AI Agent Readiness (WebMCP, llms.txt, x402, WAF, prompt injection) with one free CLI command." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="PawTest Open Source" />
+  <link rel="canonical" href="https://waterdolphinkiller.github.io/pawtest/" />
   <link rel="alternate" type="text/markdown" href="./index.md" />
   <link rel="describedby" href="./llms.txt" />
+  <link rel="sitemap" type="application/xml" href="./sitemap.xml" />
+
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="PawTest — 16 Optical Cat QA Agents (Human UX &times; AI Agent Readiness)" />
-  <meta property="og:description" content="Run npx pawtest &lt;url&gt; for deterministic dual-axis QA: WCAG 2.2, Core Web Vitals, Secret Leaks, Markdown Token-Tax, W3C WebMCP, Prompt Injection, UCP/ACP &amp; RFC 9421." />
-  <meta property="og:image" content="./assets/social-cover-1280x640.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="PawTest" />
+  <meta property="og:url" content="https://waterdolphinkiller.github.io/pawtest/" />
+  <meta property="og:title" content="PawTest — Free Website QA &amp; AI Agent Readiness Audit CLI" />
+  <meta property="og:description" content="16 zero-dependency browser probes auditing Human UX (0-100) and AI Agent Readiness (0-100) in ~5.7s. Includes a 3-tool MCP server for Claude Code &amp; Cursor at $0 API cost." />
+  <meta property="og:image" content="https://waterdolphinkiller.github.io/pawtest/assets/social-cover-1280x640.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="640" />
+  <meta property="og:image:alt" content="PawTest dual-axis Human UX and AI Agent Readiness scorecard" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PawTest — Free Website QA &amp; AI Agent Readiness Audit CLI" />
+  <meta name="twitter:description" content="Check if your site breaks for humans or AI agents (Claude Code, shopping agents, search crawlers) in one zero-dependency CLI command." />
+  <meta name="twitter:image" content="https://waterdolphinkiller.github.io/pawtest/assets/social-cover-1280x640.png" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PawTest",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Linux, macOS, Windows",
-    "softwareVersion": "3.1.1",
-    "license": "https://opensource.org/licenses/MIT",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": "16 pure-code 3D optical cat QA agents auditing both Human UX and AI Agent Readiness at $0 LLM API cost."
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "PawTest",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux, macOS, Windows",
+        "softwareVersion": "3.1.1",
+        "license": "https://opensource.org/licenses/MIT",
+        "url": "https://waterdolphinkiller.github.io/pawtest/",
+        "codeRepository": "https://github.com/waterdolphinkiller/pawtest",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "featureList": [
+          "Human UX Audit (WCAG 2.2, Core Web Vitals, mobile overflow, broken assets, leaked secrets)",
+          "AI Agent Readiness Audit (llms.txt v2, Markdown Token-Tax, W3C WebMCP, HTTP 402/x402, RFC 9421, WAF detection, Indirect Prompt Injection)",
+          "3-tool MCP Server for Claude Code and Cursor",
+          "Head-to-head competitor comparison (pawtest diff)",
+          "SARIF 2.1.0 GitHub Code Scanning export"
+        ],
+        "description": "Zero-dependency Node.js CLI and MCP Server with 16 deterministic browser probes auditing Human UX (0-100) and AI Agent Readiness (0-100) at $0 LLM API cost."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is PawTest different from Google Lighthouse?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Google Lighthouse measures page speed, basic accessibility, and SEO for human visitors. PawTest covers those human UX fundamentals and adds 2026 AI agent checks: whether your WAF silently blocks live AI agents, how much extra token cost your HTML creates (Markdown Token-Tax), whether prices match JSON-LD, W3C WebMCP form schemas, and indirect prompt injection risks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does PawTest require an OpenAI or Anthropic API key?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. PawTest is 100% deterministic pure code with zero runtime npm dependencies (96.8 KB). It talks directly to your local Chrome, Edge, or Brave browser via CDP, so every audit runs locally at $0 LLM API cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I connect PawTest to Claude Code or Cursor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run npx pawtest --mcp or register it in your MCP config. It exposes three lean tools (pawtest_audit, pawtest_cat, and pawtest_fix_prompt) so your coding agent can audit localhost, apply generated scaffolds, and re-verify fixes automatically."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I check if my website accidentally blocks AI shopping or search agents?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run npx pawtest https://your-site.com --full. PawTest evaluates RFC 9309 tiered crawler rules, Cloudflare Content-Signal, 7 /.well-known/ agent manifests, and fingerprints 7 major WAFs (Cloudflare, DataDome, Akamai, PerimeterX/HUMAN, AWS WAF, and Anubis PoW)."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
+
   <style>
     :root {
-      --bg: #0f0d0c;
-      --surface: #1b1715;
-      --surface-2: #241f1c;
-      --border: #3d352f;
-      --text: #faf6f1;
-      --muted: #cfc5bb;
-      --amber: #f59e0b;
-      --amber-text: #11100f;
-      --green: #4ade80;
-      --violet: #c4b5fd;
+      --bg: #070708;
+      --bg-elevated: #0d0d10;
+      --surface: #121216;
+      --surface-hover: #17171c;
+      --line: rgba(214, 184, 122, 0.16);
+      --line-strong: rgba(214, 184, 122, 0.36);
+      --ink: #f4efe6;
+      --ink-soft: #c9c1b4;
+      --ink-muted: #9e9588;
+      --gold: #d6b87a;
+      --gold-bright: #ead29c;
+      --gold-ink: #0a0907;
+      --emerald: #6ee7b7;
+      --emerald-soft: rgba(110, 231, 183, 0.12);
+      --rose: #fda4af;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      --mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-    * { box-sizing: border-box; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; background: var(--bg); }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
+      background:
+        radial-gradient(ellipse 75% 48% at 72% 10%, rgba(214, 184, 122, 0.08), transparent 65%),
+        radial-gradient(ellipse 60% 40% at 15% 88%, rgba(214, 184, 122, 0.045), transparent 65%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
-    a { color: #fbbf24; text-decoration: underline; text-underline-offset: 3px; }
-    a:focus-visible, button:focus-visible, input:focus-visible {
-      outline: 3px solid #fbbf24;
-      outline-offset: 2px;
+
+    ::selection { background: rgba(214, 184, 122, 0.28); color: var(--ink); }
+
+    a {
+      color: var(--gold-bright);
+      text-decoration: none;
+      transition: color 0.25s var(--ease);
     }
+    a:hover { color: var(--ink); }
+    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 3px;
+    }
+
     .skip-link {
-      position: absolute; left: -9999px; top: 8px;
-      background: var(--amber); color: var(--amber-text);
-      padding: 12px 16px; font-weight: 800; border-radius: 8px; z-index: 100;
+      position: absolute; left: -9999px; top: 12px;
+      background: var(--gold); color: var(--gold-ink);
+      padding: 12px 18px; font-weight: 700; z-index: 200;
+      letter-spacing: 0.04em;
     }
     .skip-link:focus { left: 16px; }
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    .scroll-rail {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px;
+      background: rgba(214, 184, 122, 0.08); z-index: 120; pointer-events: none;
+    }
+    .scroll-bar {
+      height: 100%; width: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+      transform-origin: left center; transform: scaleX(0);
+      will-change: transform;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    @media (max-width: 640px) { .container { padding: 0 18px; } }
+
+    /* Navigation */
     header {
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
+      position: sticky; top: 0; z-index: 90;
+      background: rgba(7, 7, 8, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
-    .nav-bar {
+    .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px; padding: 14px 0;
+      gap: 20px; min-height: 74px; flex-wrap: wrap; padding: 8px 0;
     }
-    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 800; font-size: 1.15rem; min-height: 44px; }
-    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 14px;
+      color: var(--ink); min-height: 44px;
+    }
+    .brand-mark {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(145deg, rgba(214, 184, 122, 0.14), rgba(18, 18, 22, 0.9));
+    }
+    .brand-title {
+      font-family: var(--serif); font-size: 1.25rem; letter-spacing: 0.04em; font-weight: 600;
+    }
+    .brand-ver {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+      color: var(--gold); text-transform: uppercase;
+      border-left: 1px solid var(--line); padding-left: 12px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
     .nav-links a {
-      display: inline-flex; align-items: center; min-height: 44px; min-width: 44px;
-      padding: 8px 14px; border-radius: 10px; color: var(--text); text-decoration: none;
-      border: 1px solid transparent; font-weight: 600;
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 13px;
+      font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-soft); position: relative;
     }
-    .nav-links a:hover { border-color: var(--border); background: var(--surface-2); }
-    main { padding: 32px 0 64px; }
-    .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: center; }
-    @media (max-width: 820px) { .hero { grid-template-columns: 1fr; } }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--surface-2); border: 1px solid var(--border);
-      padding: 6px 12px; border-radius: 999px; font-size: 0.875rem; font-weight: 700;
-      color: var(--text);
+    .nav-links a::after {
+      content: ""; position: absolute; left: 13px; right: 13px; bottom: 8px; height: 1px;
+      background: var(--gold); transform: scaleX(0); transform-origin: right center;
+      transition: transform 0.35s var(--ease);
     }
-    .pill.s-tier { border-color: #22c55e; color: #86efac; }
-    h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: 0 0 16px; font-weight: 900; }
-    .lead { font-size: 1.125rem; color: var(--muted); margin: 0 0 24px; }
-    .cmd-box {
-      background: #14110f; border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 18px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.95rem; color: #fde68a; overflow-x: auto; margin-bottom: 20px;
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left center; }
+    .nav-cta {
+      border: 1px solid var(--line-strong) !important;
+      color: var(--gold-bright) !important;
+      margin-left: 6px;
     }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .nav-cta:hover { background: rgba(214, 184, 122, 0.1); }
+    .nav-cta::after { display: none; }
+
+    /* Hero */
+    .hero {
+      padding: 64px 0 52px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 960px) {
+      .hero { padding: 40px 0 40px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+    }
+    .eyebrow-rule { width: 28px; height: 1px; background: var(--gold); display: inline-block; }
+    .grade-chip {
+      color: var(--emerald);
+      border: 1px solid rgba(110, 231, 183, 0.34);
+      background: var(--emerald-soft);
+      padding: 3px 10px;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.35rem, 4.6vw, 4rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 22px;
+      color: var(--ink);
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold-bright);
+      font-weight: 400;
+    }
+
+    .hero-lead {
+      font-size: 1.06rem;
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin: 0 0 28px;
+      line-height: 1.72;
+    }
+
+    /* Interactive Hero Feature Console */
+    .feature-console {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18, 18, 22, 0.92), rgba(11, 11, 14, 0.96));
+      position: relative;
+      margin-bottom: 26px;
+    }
+    .feature-console::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.65;
+    }
+    .mode-tabs {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+    @media (max-width: 580px) { .mode-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .mode-tab {
+      appearance: none; background: transparent; border: 0;
+      border-right: 1px solid var(--line);
+      color: var(--ink-muted); cursor: pointer;
+      min-height: 46px; padding: 10px 10px;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: center;
+      transition: color 0.25s var(--ease), background 0.25s var(--ease);
+      position: relative;
+    }
+    .mode-tab:last-child { border-right: 0; }
+    .mode-tab:hover { color: var(--ink); background: rgba(214, 184, 122, 0.05); }
+    .mode-tab[aria-selected="true"] {
+      color: var(--gold-bright);
+      background: rgba(214, 184, 122, 0.09);
+    }
+    .mode-tab[aria-selected="true"]::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+      background: var(--gold-bright);
+    }
+
+    .console-body { padding: 18px 20px; }
+    .cmd-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: #070708; border: 1px solid var(--line);
+      padding: 10px 12px 10px 16px;
+    }
+    .cmd-code {
+      font-family: var(--mono); font-size: 0.88rem; color: var(--gold-bright);
+      overflow-x: auto; white-space: nowrap; flex: 1;
+      transition: opacity 0.2s var(--ease);
+    }
+    .cmd-prompt { color: var(--ink-muted); margin-right: 8px; user-select: none; }
+    .copy-btn {
+      appearance: none; background: transparent;
+      border: 1px solid var(--line-strong); color: var(--ink);
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; cursor: pointer;
+      min-height: 44px; min-width: 78px; padding: 0 14px;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+    .copy-btn:hover { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+    .mode-caption {
+      margin: 12px 0 0; font-size: 0.88rem; color: var(--ink-soft);
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .mode-tag {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--gold);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px; min-width: 48px; padding: 12px 20px; border-radius: 12px;
-      font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none;
-      border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; min-width: 48px; padding: 0 24px;
+      font-family: var(--sans); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      background: transparent; color: var(--ink); cursor: pointer;
+      transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
     }
-    .btn.primary { background: var(--amber); color: var(--amber-text); border-color: var(--amber); }
-    .hero-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px;
+    .btn:hover { transform: translateY(-1px); border-color: var(--gold-bright); background: rgba(214, 184, 122, 0.08); }
+    .btn-primary {
+      background: var(--gold); color: var(--gold-ink); border-color: var(--gold);
     }
-    .hero-card img { width: 100%; height: auto; border-radius: 12px; display: block; border: 1px solid var(--border); }
-    .section { margin-top: 56px; }
-    .section h2 { font-size: 1.75rem; margin: 0 0 12px; }
-    .section p.sub { color: var(--muted); margin: 0 0 24px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 540px) { .grid-4 { grid-template-columns: 1fr; } }
-    .card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+    .btn-primary:hover {
+      background: var(--gold-bright); color: var(--gold-ink); border-color: var(--gold-bright);
     }
-    .card h3 { margin: 0 0 8px; font-size: 1.05rem; color: #fbbf24; }
-    .card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.95rem; }
+
+    /* Hero Crystal Cat Stage */
+    .stage-frame {
+      position: relative;
+      border: 1px solid var(--line-strong);
+      background: radial-gradient(circle at 50% 42%, rgba(214, 184, 122, 0.11), rgba(9, 9, 11, 0.98) 68%);
+      aspect-ratio: 4 / 4.25;
+      min-height: 360px;
+      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .stage-corner {
+      position: absolute; width: 12px; height: 12px; pointer-events: none; z-index: 3;
+      border-color: var(--gold-bright); border-style: solid; border-width: 0;
+    }
+    .stage-corner.tl { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+    .stage-corner.tr { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+    .stage-corner.bl { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+    .stage-corner.br { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+    #crystal-stage {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    }
+    .stage-hud-top, .stage-hud-bottom {
+      position: relative; z-index: 2; padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      pointer-events: none;
+    }
+    .stage-hud-top { border-bottom: 1px solid rgba(214, 184, 122, 0.12); }
+    .stage-hud-bottom {
+      border-top: 1px solid rgba(214, 184, 122, 0.12);
+      background: linear-gradient(180deg, transparent, rgba(7, 7, 8, 0.85));
+    }
+    .hud-label {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hud-value {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ink-soft);
+    }
+    .stage-controls { pointer-events: auto; display: flex; gap: 6px; }
+    .craft-dot {
+      width: 44px; height: 44px; display: grid; place-items: center;
+      background: transparent; border: 0; cursor: pointer; padding: 0;
+    }
+    .craft-swatch {
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .craft-dot[aria-pressed="true"] .craft-swatch {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 3px rgba(214, 184, 122, 0.28);
+      border-color: var(--gold-bright);
+    }
+
+    /* Key Specs Ribbon */
+    .specs-ribbon {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      margin-top: 44px;
+    }
+    @media (max-width: 760px) { .specs-ribbon { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .spec-cell {
+      padding: 22px 20px 6px 20px;
+      border-right: 1px solid var(--line);
+    }
+    .spec-cell:first-child { padding-left: 0; }
+    .spec-cell:last-child { border-right: 0; }
+    @media (max-width: 760px) {
+      .spec-cell { padding: 18px 14px; border-bottom: 1px solid var(--line); }
+      .spec-cell:nth-child(2n) { border-right: 0; }
+    }
+    .spec-num {
+      font-family: var(--serif); font-size: 2rem; font-weight: 500;
+      color: var(--gold-bright); line-height: 1.1; margin-bottom: 6px;
+    }
+    .spec-label {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    @media (max-width: 760px) { .section { padding: 54px 0; } }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .section-kicker {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    h2 {
+      font-family: var(--serif); font-size: clamp(1.85rem, 3vw, 2.6rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -0.015em; margin: 0;
+    }
+    .section-sub {
+      color: var(--ink-soft); max-width: 50ch; margin: 0; font-size: 0.98rem;
+    }
+
+    /* Editorial Problem-Solution Strip (US Market Clarity) */
+    .compare-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+    }
+    @media (max-width: 860px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-col {
+      border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 24px; background: rgba(13, 13, 16, 0.72);
+    }
+    .compare-col h3 {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 500;
+      margin: 8px 0 12px; color: var(--ink);
+    }
+    .compare-col p { margin: 0; color: var(--ink-soft); font-size: 0.94rem; line-height: 1.65; }
+
+    /* Filters */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .filter-btn {
+      appearance: none; background: transparent;
+      border: 1px solid var(--line); color: var(--ink-soft);
+      min-height: 44px; padding: 0 16px; cursor: pointer;
+      font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.25s var(--ease);
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--ink); }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 700;
+    }
+
+    /* 4x4 Cat Matrix */
+    .matrix-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+    }
+    @media (max-width: 980px) { .matrix-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .matrix-grid { grid-template-columns: 1fr; } }
+    .cat-card {
+      border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 22px 20px; background: rgba(13, 13, 16, 0.72);
+      transition: background 0.3s var(--ease);
+    }
+    .cat-card:hover { background: var(--surface-hover); }
+    .cat-card[hidden] { display: none; }
+    .cat-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+    }
+    .cat-id { color: var(--gold); }
+    .cat-axis { color: var(--ink-muted); text-transform: uppercase; }
+    .cat-name {
+      font-family: var(--serif); font-size: 1.22rem; font-weight: 500;
+      margin: 0 0 8px; color: var(--ink);
+    }
+    .cat-desc { margin: 0; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
+
+    /* Benchmark Table */
+    .table-wrap {
+      border: 1px solid var(--line); background: rgba(12, 12, 15, 0.88);
+      overflow-x: auto;
+    }
+    table.bench {
+      width: 100%; border-collapse: collapse; min-width: 680px; font-size: 0.92rem;
+    }
+    table.bench th {
+      text-align: left; padding: 14px 18px;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+      border-bottom: 1px solid var(--line-strong);
+      background: rgba(214, 184, 122, 0.04);
+    }
+    table.bench td {
+      padding: 14px 18px; border-bottom: 1px solid var(--line);
+      color: var(--ink-soft); vertical-align: middle;
+    }
+    table.bench tbody tr { transition: background 0.2s var(--ease); }
+    table.bench tbody tr:hover { background: rgba(214, 184, 122, 0.045); }
+    table.bench tbody tr[hidden] { display: none; }
+    .rank-col { font-family: var(--mono); color: var(--ink-muted); width: 58px; }
+    .site-col { font-family: var(--mono); color: var(--ink); font-weight: 600; }
+    .score-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 0.82rem; font-weight: 600;
+    }
+    .grade-s { color: var(--emerald); }
+    .grade-a { color: var(--gold-bright); }
+    .grade-b { color: var(--ink); }
+    .grade-d { color: var(--rose); }
+    .tax-col { font-family: var(--mono); font-size: 0.84rem; }
+    .tax-hot { color: var(--gold-bright); font-weight: 600; }
+    .waf-badge {
+      display: inline-block; font-family: var(--mono); font-size: 0.72rem;
+      letter-spacing: 0.06em; padding: 2px 8px;
+      border: 1px solid rgba(253, 164, 175, 0.35); color: var(--rose);
+    }
+    .waf-none { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-muted); }
+
+    /* Dogfood Gallery Showcase (Zero Broken Image Guarantee) */
+    .dogfood-grid {
+      display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+      gap: 32px; align-items: stretch;
+    }
+    @media (max-width: 900px) { .dogfood-grid { grid-template-columns: 1fr; } }
+    .gallery-plaque {
+      border: 1px solid var(--line-strong); padding: 18px;
+      background: linear-gradient(160deg, rgba(214, 184, 122, 0.06), rgba(10, 10, 12, 0.96));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-plaque img {
+      width: 100%; height: auto; display: block; border: 1px solid var(--line);
+    }
+    .dogfood-meta {
+      border: 1px solid var(--line); padding: 28px 24px;
+      background: rgba(13, 13, 16, 0.82);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
+    }
+    .audit-kv { list-style: none; margin: 0; padding: 0; }
+    .audit-kv li {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+    .audit-kv li:last-child { border-bottom: 0; }
+    .audit-kv span:first-child { color: var(--ink-muted); font-family: var(--mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .audit-kv strong { color: var(--ink); font-weight: 600; }
+
+    /* WebMCP Form Panel */
+    .webmcp-panel {
+      display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 36px; align-items: start;
+    }
+    @media (max-width: 860px) { .webmcp-panel { grid-template-columns: 1fr; } }
     .demo-form {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-      display: grid; gap: 14px; max-width: 640px;
+      border: 1px solid var(--line-strong);
+      background: rgba(13, 13, 16, 0.88);
+      padding: 28px; display: grid; gap: 18px;
     }
-    .demo-form label { font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 6px; }
+    .demo-form label {
+      display: block; font-family: var(--mono); font-size: 0.76rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
     .demo-form input {
-      width: 100%; min-height: 48px; padding: 10px 14px; border-radius: 10px;
-      border: 1px solid var(--border); background: #14110f; color: var(--text); font-size: 1rem;
+      width: 100%; min-height: 48px; padding: 12px 14px;
+      background: #070708; border: 1px solid var(--line-strong);
+      color: var(--ink); font-family: var(--mono); font-size: 0.94rem;
+      transition: border-color 0.25s var(--ease);
     }
-    .status-note { font-size: 0.95rem; color: var(--green); min-height: 24px; }
+    .demo-form input:focus { border-color: var(--gold-bright); }
+    .status-note {
+      font-family: var(--mono); font-size: 0.84rem; color: var(--emerald);
+      min-height: 26px; word-break: break-all;
+    }
+
+    /* FAQ Accordion (SEO + Human Clarity) */
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item summary {
+      list-style: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      min-height: 58px; padding: 18px 4px;
+      font-family: var(--serif); font-size: 1.18rem; color: var(--ink);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-plus {
+      font-family: var(--mono); color: var(--gold); font-size: 1.15rem;
+      transition: transform 0.3s var(--ease);
+    }
+    .faq-item[open] .faq-plus { transform: rotate(45deg); }
+    .faq-item p {
+      margin: 0 0 22px; color: var(--ink-soft); max-width: 76ch;
+      font-size: 0.96rem; line-height: 1.7; padding: 0 4px;
+    }
+
     dialog {
-      background: var(--surface); color: var(--text); border: 2px solid var(--amber);
-      border-radius: 16px; padding: 24px; max-width: 440px; width: calc(100% - 32px);
+      background: var(--surface); color: var(--ink);
+      border: 1px solid var(--gold); padding: 28px;
+      max-width: 440px; width: calc(100% - 32px);
     }
-    dialog::backdrop { background: rgba(0, 0, 0, 0.72); }
-    footer {
-      border-top: 1px solid var(--border); background: var(--surface);
-      padding: 28px 0; color: var(--muted); font-size: 0.95rem;
+    dialog::backdrop { background: rgba(0, 0, 0, 0.78); backdrop-filter: blur(4px); }
+    dialog h3 { font-family: var(--serif); margin: 0 0 10px; font-size: 1.35rem; font-weight: 500; }
+    dialog p { color: var(--ink-soft); margin: 0 0 22px; font-size: 0.94rem; }
+
+    footer { padding: 40px 0 56px; background: #050506; }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; flex-wrap: wrap;
     }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; }
-    .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+    .footer-brand { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+    .footer-note { font-size: 0.86rem; color: var(--ink-muted); margin-top: 4px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a {
+      min-height: 44px; display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+    .footer-links a:hover { color: var(--gold-bright); }
+
+    .reveal {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .js-ready .reveal:not(.is-visible) {
+      opacity: 0; transform: translateY(18px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js-ready .reveal:not(.is-visible) { opacity: 1; transform: none; }
+      .btn, .nav-links a::after { transition: none; }
+    }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="scroll-rail" aria-hidden="true"><div class="scroll-bar" id="scroll-bar"></div></div>
+
   <header>
-    <div class="container nav-bar">
+    <div class="container nav-inner">
       <a class="brand" href="./index.html">
-        <img src="./assets/logo.svg" alt="PawTest Optical Cat Logo" width="40" height="40" />
-        <span>PawTest v3.1</span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 4L8.5 9.5H15.5L19 4L20.5 14L12 20.5L3.5 14L5 4Z" stroke="#ead29c" stroke-width="1.35" stroke-linejoin="round"/>
+            <path d="M8.5 9.5L12 20.5L15.5 9.5M3.5 14H20.5" stroke="#d6b87a" stroke-opacity="0.55" stroke-width="1"/>
+          </svg>
+        </span>
+        <span class="brand-title">PawTest</span>
+        <span class="brand-ver">v3.1.1</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#why">Why PawTest</a>
         <a href="#matrix">16-Cat Matrix</a>
+        <a href="#leaderboard">Top 20 Audit</a>
         <a href="#dogfood">S-Tier Proof</a>
-        <a href="#webmcp">WebMCP Demo</a>
-        <a href="./llms.txt">llms.txt</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="https://github.com/waterdolphinkiller/pawtest" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
 
-  <main id="main-content" class="container">
+  <main id="main-content">
     <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <div class="pill-row">
-          <span class="pill s-tier">Dogfooded: Human UX S (100)</span>
-          <span class="pill s-tier">AI Agent Readiness S (100)</span>
-          <span class="pill">$0 LLM API Cost</span>
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-rule" aria-hidden="true"></span>
+              <span>Free Website QA &amp; AI Readiness CLI</span>
+              <span class="grade-chip">Human S · 100</span>
+              <span class="grade-chip">Agent S · 100</span>
+            </div>
+
+            <h1 id="hero-title">
+              Ship Websites Built for<br />
+              Humans &amp; <em>Autonomous AI.</em>
+            </h1>
+
+            <p class="hero-lead">
+              Lighthouse tells you how fast your page loads for a person. PawTest goes further: one zero-dependency CLI &amp; MCP server checks 16 real-browser probes across Human UX (WCAG 2.2, Core Web Vitals, leaked keys) and 2026 AI Agent Readiness (WAF blocks, Markdown Token-Tax, W3C WebMCP, x402, and prompt injection) — at $0 LLM API cost.
+            </p>
+
+            <div class="feature-console" role="region" aria-label="Interactive feature command switcher">
+              <div class="mode-tabs" role="tablist" aria-label="PawTest core capabilities">
+                <button type="button" class="mode-tab" role="tab" aria-selected="true" data-mode="audit">Dual-Axis Audit</button>
+                <button type="button" class="mode-tab" role="tab" aria-selected="false" data-mode="diff">Competitor PK</button>
+                <button type="button" class="mode-tab" role="tab" aria-selected="false" data-mode="mcp">3-Tool MCP</button>
+                <button type="button" class="mode-tab" role="tab" aria-selected="false" data-mode="scaffold">Auto-Scaffold</button>
+              </div>
+              <div class="console-body">
+                <div class="cmd-row">
+                  <div class="cmd-code" id="hero-cmd"><span class="cmd-prompt">$</span>npx pawtest https://your-site.com --full --share-card --gif</div>
+                  <button type="button" class="copy-btn" id="copy-cmd-btn" aria-label="Copy command">Copy</button>
+                </div>
+                <div class="mode-caption">
+                  <span id="hero-caption">Runs all 16 browser probes via a shared read-only tab pool (~5.7s) and exports a 1200&times;630 scorecard + pure-JS GIF.</span>
+                  <span class="mode-tag" id="hero-tag">$0 API Cost</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#leaderboard">See Top-20 Live Benchmark</a>
+              <a class="btn" href="#webmcp">Try WebMCP Gate</a>
+              <a class="btn" href="./index.md">Read Agent Markdown</a>
+            </div>
+          </div>
+
+          <div class="stage-frame" aria-label="Interactive pure-code WebGL2 faceted crystal origami cat specimen">
+            <span class="stage-corner tl" aria-hidden="true"></span>
+            <span class="stage-corner tr" aria-hidden="true"></span>
+            <span class="stage-corner bl" aria-hidden="true"></span>
+            <span class="stage-corner br" aria-hidden="true"></span>
+
+            <canvas id="crystal-stage" role="img" aria-label="3D faceted obsidian and 24K gold origami cat rotating above a reflective basalt plane"></canvas>
+
+            <div class="stage-hud-top">
+              <span class="hud-label" id="craft-name">01 · Obsidian 24K Kintsugi</span>
+              <span class="hud-value">WebGL2 · Pure Code · 0 Models</span>
+            </div>
+
+            <div class="stage-hud-bottom">
+              <div>
+                <div class="hud-label">Optical Specimen</div>
+                <div class="hud-value">Move cursor to refract facets</div>
+              </div>
+              <div class="stage-controls" role="group" aria-label="Select crystal finish">
+                <button type="button" class="craft-dot" data-craft="0" aria-pressed="true" aria-label="Obsidian 24K Kintsugi finish">
+                  <span class="craft-swatch" style="background: linear-gradient(135deg, #1b1815, #ead29c);"></span>
+                </button>
+                <button type="button" class="craft-dot" data-craft="1" aria-pressed="false" aria-label="Emerald Crystal and Brass finish">
+                  <span class="craft-swatch" style="background: linear-gradient(135deg, #064e3b, #6ee7b7);"></span>
+                </button>
+                <button type="button" class="craft-dot" data-craft="2" aria-pressed="false" aria-label="Smoked Cognac Baccarat finish">
+                  <span class="craft-swatch" style="background: linear-gradient(135deg, #451a03, #f59e0b);"></span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <h1 id="hero-title">16 Pure-Code Optical Cat QA Agents for Humans &amp; Autonomous AI</h1>
-        <p class="lead">
-          One zero-dependency command audits your web app for WCAG 2.2, Core Web Vitals, leaked secrets,
-          Markdown Token-Tax, W3C WebMCP, Indirect Prompt Injection, UCP/ACP, and RFC 9421 Web Bot Auth.
-        </p>
-        <div class="cmd-box" role="region" aria-label="Quick start command">
-          npx pawtest https://your-site.com --full --share-card --gif
-        </div>
-        <div class="cta-row">
-          <a class="btn primary" href="#webmcp">Try Safe WebMCP Gate</a>
-          <a class="btn" href="./index.md">View Agent Markdown</a>
+
+        <div class="specs-ribbon reveal">
+          <div class="spec-cell">
+            <div class="spec-num">96.8 KB</div>
+            <div class="spec-label">Zero Runtime Dependencies</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-num">~5.7 s</div>
+            <div class="spec-label">Shared Read-Only Tab Pool</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-num">16 Probes</div>
+            <div class="spec-label">Human UX &times; AI Agent Matrix</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-num">$0</div>
+            <div class="spec-label">No LLM API Keys Needed</div>
+          </div>
         </div>
       </div>
-      <div class="hero-card">
-        <img src="./assets/social-cover-1280x640.png" alt="PawTest 16 optical cats dual-axis scorecard preview" width="1280" height="640" />
+    </section>
+
+    <section id="why" class="section" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Why Engineering Teams Switch</div>
+            <h2 id="why-title">Catch What Lighthouse Misses</h2>
+          </div>
+          <p class="section-sub">
+            In 2026, your customers arrive through both browsers and autonomous AI agents. A site that scores 95 on Lighthouse can still be invisible to Claude, ChatGPT, and shopping agents.
+          </p>
+        </div>
+
+        <div class="compare-grid reveal">
+          <article class="compare-col">
+            <div class="section-kicker">01 · Silent WAF Blocks</div>
+            <h3>Stop Blocking Revenue-Bearing AI Agents</h3>
+            <p>Many sites accidentally block live search and shopping agents with overly broad WAF rules. PawTest fingerprints 7 major WAFs (Cloudflare, DataDome, Akamai, PerimeterX) and separates training scrapers from live user-initiated agents.</p>
+          </article>
+          <article class="compare-col">
+            <div class="section-kicker">02 · Markdown Token-Tax</div>
+            <h3>Cut AI Context Bloat by Up to 1,000&times;</h3>
+            <p>Heavy SPA markup forces AI browsers to burn thousands of tokens just to read one price or paragraph. PawTest measures your exact HTML-to-Markdown ratio and scaffolds <code>llms.txt</code> and Markdown alternates automatically.</p>
+          </article>
+          <article class="compare-col">
+            <div class="section-kicker">03 · Agentic Security</div>
+            <h3>Defend Against Indirect Prompt Injection</h3>
+            <p>Hidden DOM text, invisible Unicode tags, poisoned JSON-LD, and unsanitized Markdown responses can hijack visiting AI browsers. PawTest scans every surface and exports native GitHub Security SARIF 2.1.0 reports.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="matrix" class="section" aria-labelledby="matrix-title">
-      <h2 id="matrix-title">The 4&times;4 Optical Cat Matrix</h2>
-      <p class="sub">8 fast default cats finish in seconds; add <code>--full</code> for all 16 deep probes.</p>
-      <div class="grid-4">
-        <article class="card">
-          <h3>Squad A · Human UX</h3>
-          <ul>
-            <li>A1 Marmalade: Form fuzzing &amp; XSS</li>
-            <li>A2 Zoomies: 3G &amp; click idempotency</li>
-            <li>A3 Mochi: 375px–4K &amp; 175% font</li>
-            <li>A4 Pixel: 404s, images &amp; console</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Squad B · Perf &amp; A11y</h3>
-          <ul>
-            <li>B1 Naps: Core Web Vitals</li>
-            <li>B2 Shadow: WCAG 2.2 &amp; focus trap</li>
-            <li>B3 Scout: SEO, H1 &amp; OG tags</li>
-            <li>B4 Chaos: Offline &amp; auth recovery</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Squad C · Security &amp; GEO</h3>
-          <ul>
-            <li>C1 Vault: Secret leaks &amp; CSP/HSTS</li>
-            <li>C2 RoboCat: llms.txt &amp; Token-Tax</li>
-            <li>C3 Leak: JS Heap &amp; &lt;44px targets</li>
-            <li>C4 Clever: Core flow &amp; AI SSE</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Squad D · Autonomous AI</h3>
-          <ul>
-            <li>D1 MuseBot: AXTree &amp; WebMCP</li>
-            <li>D2 Antidote: Prompt Injection scan</li>
-            <li>D3 Sentinel: Confirm gates &amp; 429</li>
-            <li>D4 Lucky: UCP, ACP &amp; RFC 9421</li>
-          </ul>
-        </article>
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Architecture · 4&times;4 Deterministic Probes</div>
+            <h2 id="matrix-title">The 16 Optical Cat QA Agents</h2>
+          </div>
+          <p class="section-sub">
+            Eight core probes finish in 2–3 seconds by default; add <code>--full</code> to run all sixteen agents across isolated interactive tabs and a shared read-only pool.
+          </p>
+        </div>
+
+        <div class="filter-bar reveal" role="group" aria-label="Filter optical cat squads">
+          <button type="button" class="filter-btn" data-squad="all" aria-pressed="true">All 16 Agents</button>
+          <button type="button" class="filter-btn" data-squad="A" aria-pressed="false">Squad A · Human UX</button>
+          <button type="button" class="filter-btn" data-squad="B" aria-pressed="false">Squad B · Perf &amp; A11y</button>
+          <button type="button" class="filter-btn" data-squad="C" aria-pressed="false">Squad C · Security &amp; GEO</button>
+          <button type="button" class="filter-btn" data-squad="D" aria-pressed="false">Squad D · Autonomous AI</button>
+        </div>
+
+        <div class="matrix-grid reveal" id="matrix-grid">
+          <article class="cat-card" data-squad="A"><div class="cat-top"><span class="cat-id">A1</span><span class="cat-axis">Human UX</span></div><h3 class="cat-name">Marmalade</h3><p class="cat-desc">Form fuzzing, XSS probe resilience, boundary input handling &amp; graceful validation.</p></article>
+          <article class="cat-card" data-squad="A"><div class="cat-top"><span class="cat-id">A2</span><span class="cat-axis">Human UX</span></div><h3 class="cat-name">Zoomies</h3><p class="cat-desc">3G throttling &amp; rapid-click idempotency checks to catch double-charge submit races.</p></article>
+          <article class="cat-card" data-squad="A"><div class="cat-top"><span class="cat-id">A3</span><span class="cat-axis">Human UX</span></div><h3 class="cat-name">Mochi</h3><p class="cat-desc">375px mobile to 4K viewport integrity, horizontal overflow &amp; 175% font-scale checks.</p></article>
+          <article class="cat-card" data-squad="A"><div class="cat-top"><span class="cat-id">A4</span><span class="cat-axis">Human UX</span></div><h3 class="cat-name">Pixel</h3><p class="cat-desc">Broken images, HTTP 4xx/5xx resource errors, uncaught console &amp; runtime exceptions.</p></article>
+
+          <article class="cat-card" data-squad="B"><div class="cat-top"><span class="cat-id">B1</span><span class="cat-axis">Perf &amp; A11y</span></div><h3 class="cat-name">Naps</h3><p class="cat-desc">Core Web Vitals (LCP, CLS, TTFB) and main-thread render responsiveness.</p></article>
+          <article class="cat-card" data-squad="B"><div class="cat-top"><span class="cat-id">B2</span><span class="cat-axis">Perf &amp; A11y</span></div><h3 class="cat-name">Shadow</h3><p class="cat-desc">WCAG 2.2 contrast ratios, keyboard focus visibility, landmarks &amp; focus-trap audits.</p></article>
+          <article class="cat-card" data-squad="B"><div class="cat-top"><span class="cat-id">B3</span><span class="cat-axis">Perf &amp; A11y</span></div><h3 class="cat-name">Scout</h3><p class="cat-desc">Semantic heading hierarchy, canonical URLs, JSON-LD schema &amp; OpenGraph integrity.</p></article>
+          <article class="cat-card" data-squad="B"><div class="cat-top"><span class="cat-id">B4</span><span class="cat-axis">Perf &amp; A11y</span></div><h3 class="cat-name">Chaos</h3><p class="cat-desc">Offline fallback behavior, network recovery &amp; resilient auth-state transitions.</p></article>
+
+          <article class="cat-card" data-squad="C"><div class="cat-top"><span class="cat-id">C1</span><span class="cat-axis">Security &amp; GEO</span></div><h3 class="cat-name">Vault</h3><p class="cat-desc">Client-side secret &amp; API key leak scanning plus CSP, HSTS &amp; security headers.</p></article>
+          <article class="cat-card" data-squad="C"><div class="cat-top"><span class="cat-id">C2</span><span class="cat-axis">Security &amp; GEO</span></div><h3 class="cat-name">RoboCat</h3><p class="cat-desc">RFC 9309 tiered AI bots, Cloudflare Content-Signal, llms.txt v2 &amp; Markdown Token-Tax.</p></article>
+          <article class="cat-card" data-squad="C"><div class="cat-top"><span class="cat-id">C3</span><span class="cat-axis">Security &amp; GEO</span></div><h3 class="cat-name">Leak</h3><p class="cat-desc">JS heap growth monitoring, detached listeners &amp; sub-44px touch target detection.</p></article>
+          <article class="cat-card" data-squad="C"><div class="cat-top"><span class="cat-id">C4</span><span class="cat-axis">Security &amp; GEO</span></div><h3 class="cat-name">Clever</h3><p class="cat-desc">Multi-step critical user funnels (<code>--flow</code>) &amp; AI SSE stream resilience.</p></article>
+
+          <article class="cat-card" data-squad="D"><div class="cat-top"><span class="cat-id">D1</span><span class="cat-axis">Autonomous AI</span></div><h3 class="cat-name">MuseBot</h3><p class="cat-desc">Shadow DOM CTA reachability, W3C WebMCP schemas, strikethrough &amp; JSON-LD price parity.</p></article>
+          <article class="cat-card" data-squad="D"><div class="cat-top"><span class="cat-id">D2</span><span class="cat-axis">Autonomous AI</span></div><h3 class="cat-name">Antidote</h3><p class="cat-desc">Indirect prompt injection scan across hidden DOM, Unicode tags, JSON-LD &amp; Markdown.</p></article>
+          <article class="cat-card" data-squad="D"><div class="cat-top"><span class="cat-id">D3</span><span class="cat-axis">Autonomous AI</span></div><h3 class="cat-name">Sentinel</h3><p class="cat-desc">Explicit confirmation gates for mutating actions &amp; same-origin HTTP 429 rate-limit checks.</p></article>
+          <article class="cat-card" data-squad="D"><div class="cat-top"><span class="cat-id">D4</span><span class="cat-axis">Autonomous AI</span></div><h3 class="cat-name">Lucky</h3><p class="cat-desc">7-endpoint <code>/.well-known/</code> matrix (UCP/ACP/AP2/A2A/MCP/RFC 9421) &amp; HTTP 402/x402.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="leaderboard" class="section" aria-labelledby="leaderboard-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Empirical Field Audit · 0 Crashes Across 20 Major Sites</div>
+            <h2 id="leaderboard-title">2026 AI Agent Readiness Benchmark</h2>
+          </div>
+          <p class="section-sub">
+            Captured locally via <code>npm run benchmark:top20</code>. Shows real-world Markdown Token-Tax multiples (up to 1,113.62&times;) and active WAF fingerprints.
+          </p>
+        </div>
+
+        <div class="filter-bar reveal" role="group" aria-label="Filter benchmark rows">
+          <button type="button" class="filter-btn" data-bench="all" aria-pressed="true">All 12 Highlights</button>
+          <button type="button" class="filter-btn" data-bench="md" aria-pressed="false">Markdown ON</button>
+          <button type="button" class="filter-btn" data-bench="waf" aria-pressed="false">WAF Detected</button>
+          <button type="button" class="filter-btn" data-bench="s" aria-pressed="false">S-Tier Human</button>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table class="bench">
+            <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Website</th>
+                <th scope="col">Human UX</th>
+                <th scope="col">AI Agent</th>
+                <th scope="col">Token-Tax</th>
+                <th scope="col">WAF / Anti-Bot</th>
+              </tr>
+            </thead>
+            <tbody id="bench-body">
+              <tr data-md="1" data-waf="0" data-s="1"><td class="rank-col">#1</td><td class="site-col">vercel.com</td><td><span class="score-pill grade-s">S · 96</span></td><td><span class="score-pill grade-a">A · 93</span></td><td class="tax-col">39.37&times; (MD ON)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="1" data-waf="0" data-s="1"><td class="rank-col">#2</td><td class="site-col">supabase.com</td><td><span class="score-pill grade-s">S · 97</span></td><td><span class="score-pill grade-a">A · 92</span></td><td class="tax-col">259.81&times; (MD ON)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="0" data-waf="0" data-s="1"><td class="rank-col">#3</td><td class="site-col">nodejs.org</td><td><span class="score-pill grade-s">S · 96</span></td><td><span class="score-pill grade-a">A · 91</span></td><td class="tax-col">141.26&times; (MD OFF)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="0" data-waf="0" data-s="0"><td class="rank-col">#5</td><td class="site-col">anthropic.com</td><td><span class="score-pill grade-a">A · 94</span></td><td><span class="score-pill grade-a">A · 91</span></td><td class="tax-col">86.26&times; (MD OFF)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="1" data-waf="0" data-s="0"><td class="rank-col">#7</td><td class="site-col">cloudflare.com</td><td><span class="score-pill grade-a">A · 89</span></td><td><span class="score-pill grade-s">A · 94</span></td><td class="tax-col">446.55&times; (MD ON)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="0" data-waf="0" data-s="1"><td class="rank-col">#9</td><td class="site-col">stripe.com</td><td><span class="score-pill grade-s">S · 95</span></td><td><span class="score-pill grade-a">A · 87</span></td><td class="tax-col">56.78&times; (MD OFF)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="0" data-waf="1" data-s="0"><td class="rank-col">#11</td><td class="site-col">openai.com</td><td><span class="score-pill grade-a">A · 93</span></td><td><span class="score-pill grade-a">A · 87</span></td><td class="tax-col">146.13&times; (MD OFF)</td><td><span class="waf-badge">Cloudflare</span></td></tr>
+              <tr data-md="0" data-waf="1" data-s="0"><td class="rank-col">#15</td><td class="site-col">target.com</td><td><span class="score-pill grade-a">A · 88</span></td><td><span class="score-pill grade-a">A · 86</span></td><td class="tax-col">128.21&times; (MD OFF)</td><td><span class="waf-badge">PerimeterX / HUMAN</span></td></tr>
+              <tr data-md="0" data-waf="1" data-s="0"><td class="rank-col">#16</td><td class="site-col">walmart.com</td><td><span class="score-pill grade-a">A · 91</span></td><td><span class="score-pill grade-b">B · 81</span></td><td class="tax-col">131.70&times; (MD OFF)</td><td><span class="waf-badge">PerimeterX / HUMAN</span></td></tr>
+              <tr data-md="0" data-waf="0" data-s="0"><td class="rank-col">#17</td><td class="site-col">airbnb.com</td><td><span class="score-pill grade-a">A · 86</span></td><td><span class="score-pill grade-b">B · 84</span></td><td class="tax-col tax-hot">1,113.62&times; (MD OFF)</td><td><span class="waf-none">None</span></td></tr>
+              <tr data-md="0" data-waf="1" data-s="0"><td class="rank-col">#19</td><td class="site-col">ebay.com</td><td><span class="score-pill grade-d">D · 55</span></td><td><span class="score-pill grade-d">D · 55</span></td><td class="tax-col">—</td><td><span class="waf-badge">Akamai Bot Manager</span></td></tr>
+              <tr data-md="0" data-waf="1" data-s="0"><td class="rank-col">#20</td><td class="site-col">etsy.com</td><td><span class="score-pill grade-d">D · 55</span></td><td><span class="score-pill grade-d">D · 55</span></td><td class="tax-col">—</td><td><span class="waf-badge">DataDome</span></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
     <section id="dogfood" class="section" aria-labelledby="dogfood-title">
-      <h2 id="dogfood-title">Verified Dogfooding Scorecard</h2>
-      <p class="sub">Generated locally by running PawTest <code>--full</code> against this exact page.</p>
-      <div class="hero-card">
-        <img src="./assets/pawtest-dogfood-card.png" alt="PawTest dogfood scorecard showing Human UX S 100 and AI Agent Readiness S 100" width="1200" height="630" />
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Self-Verification · Dual S-Tier Standard</div>
+            <h2 id="dogfood-title">Verified Dogfooding Scorecard</h2>
+          </div>
+          <p class="section-sub">
+            Every release audits this exact page with <code>npm run dogfood</code> before shipping, verifying 100/100 across both Human UX and AI Agent Readiness.
+          </p>
+        </div>
+
+        <div class="dogfood-grid reveal">
+          <div class="gallery-plaque">
+            <svg viewBox="0 0 1200 630" width="1200" height="630" style="width:100%;height:auto;display:block;border:1px solid rgba(214,184,122,0.22);" role="img" aria-label="PawTest v3.1.1 verified dual-axis scorecard: Human UX S 100 and AI Agent Readiness S 100 across all 16 optical cats">
+              <defs>
+                <radialGradient id="sc-glow" cx="78%" cy="18%" r="72%">
+                  <stop offset="0%" stop-color="#d6b87a" stop-opacity="0.14"/>
+                  <stop offset="55%" stop-color="#0d0d10" stop-opacity="0.0"/>
+                </radialGradient>
+                <linearGradient id="sc-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#c9a563"/>
+                  <stop offset="50%" stop-color="#f0dcac"/>
+                  <stop offset="100%" stop-color="#d6b87a"/>
+                </linearGradient>
+                <linearGradient id="sc-card" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#141418"/>
+                  <stop offset="100%" stop-color="#0b0b0e"/>
+                </linearGradient>
+              </defs>
+              <rect width="1200" height="630" fill="#070708"/>
+              <rect width="1200" height="630" fill="url(#sc-glow)"/>
+              <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#d6b87a" stroke-opacity="0.28" stroke-width="1"/>
+              <!-- Corner hairline ticks -->
+              <path d="M24 44V24H44 M1156 24H1176V44 M24 586V606H44 M1156 606H1176V586" fill="none" stroke="#ead29c" stroke-width="2"/>
+
+              <!-- Header bar -->
+              <g transform="translate(64,62)">
+                <rect x="0" y="0" width="38" height="38" fill="#121216" stroke="#d6b87a" stroke-opacity="0.55"/>
+                <path d="M10 9L14.5 16.5H23.5L28 9L30 22.5L19 30.5L8 22.5L10 9Z" fill="none" stroke="#ead29c" stroke-width="1.4" stroke-linejoin="round"/>
+                <text x="54" y="16" fill="#d6b87a" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" letter-spacing="3">PAWTEST v3.1.1 · VERIFIED DUAL-AXIS SCORECARD</text>
+                <text x="54" y="38" fill="#f4efe6" font-family="Georgia,serif" font-size="24">waterdolphinkiller.github.io/pawtest/</text>
+                <rect x="854" y="4" width="218" height="32" fill="#0d1915" stroke="#6ee7b7" stroke-opacity="0.45"/>
+                <text x="963" y="25" text-anchor="middle" fill="#6ee7b7" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" letter-spacing="2">16 / 16 CATS PASSED</text>
+              </g>
+
+              <line x1="64" y1="122" x2="1136" y2="122" stroke="#d6b87a" stroke-opacity="0.18"/>
+
+              <!-- Two luxury score plaques -->
+              <g transform="translate(64,148)">
+                <rect x="0" y="0" width="520" height="222" fill="url(#sc-card)" stroke="#d6b87a" stroke-opacity="0.32"/>
+                <line x1="0" y1="0" x2="520" y2="0" stroke="url(#sc-gold)" stroke-width="1.5"/>
+                <text x="32" y="42" fill="#d6b87a" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" letter-spacing="3">AXIS 01 · HUMAN UX</text>
+                <text x="32" y="138" fill="#6ee7b7" font-family="Georgia,serif" font-size="88">S</text>
+                <text x="104" y="136" fill="#f4efe6" font-family="Georgia,serif" font-size="56">100</text>
+                <text x="206" y="136" fill="#9e9588" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="20">/ 100</text>
+                <text x="32" y="188" fill="#c9c1b4" font-family="-apple-system,Segoe UI,sans-serif" font-size="15">WCAG 2.2 · Core Web Vitals · Zero Leaks · 0 Overflow</text>
+              </g>
+
+              <g transform="translate(616,148)">
+                <rect x="0" y="0" width="520" height="222" fill="url(#sc-card)" stroke="#d6b87a" stroke-opacity="0.32"/>
+                <line x1="0" y1="0" x2="520" y2="0" stroke="url(#sc-gold)" stroke-width="1.5"/>
+                <text x="32" y="42" fill="#d6b87a" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" letter-spacing="3">AXIS 02 · 2026 AI AGENT READINESS</text>
+                <text x="32" y="138" fill="url(#sc-gold)" font-family="Georgia,serif" font-size="88">S</text>
+                <text x="104" y="136" fill="#f4efe6" font-family="Georgia,serif" font-size="56">100</text>
+                <text x="206" y="136" fill="#9e9588" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="20">/ 100</text>
+                <text x="32" y="188" fill="#c9c1b4" font-family="-apple-system,Segoe UI,sans-serif" font-size="15">WebMCP · llms.txt · UCP/ACP · RFC 9421 · 0 Injection</text>
+              </g>
+
+              <!-- 16 Optical Cats Matrix Strip -->
+              <g transform="translate(64,404)" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12">
+                <text x="0" y="0" fill="#9e9588" letter-spacing="2.5">ALL 16 DETERMINISTIC OPTICAL CAT PROBES</text>
+                <g transform="translate(0,22)">
+                  <rect x="0" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="14" cy="18" r="3.5" fill="#6ee7b7"/><text x="26" y="22" fill="#f4efe6">A1 100</text>
+                  <rect x="135" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="149" cy="18" r="3.5" fill="#6ee7b7"/><text x="161" y="22" fill="#f4efe6">A2 100</text>
+                  <rect x="270" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="284" cy="18" r="3.5" fill="#6ee7b7"/><text x="296" y="22" fill="#f4efe6">A3 100</text>
+                  <rect x="405" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="419" cy="18" r="3.5" fill="#6ee7b7"/><text x="431" y="22" fill="#f4efe6">A4 100</text>
+                  <rect x="540" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="554" cy="18" r="3.5" fill="#6ee7b7"/><text x="566" y="22" fill="#f4efe6">B1 100</text>
+                  <rect x="675" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="689" cy="18" r="3.5" fill="#6ee7b7"/><text x="701" y="22" fill="#f4efe6">B2 100</text>
+                  <rect x="810" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="824" cy="18" r="3.5" fill="#6ee7b7"/><text x="836" y="22" fill="#f4efe6">B3 100</text>
+                  <rect x="945" y="0" width="127" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="959" cy="18" r="3.5" fill="#6ee7b7"/><text x="971" y="22" fill="#f4efe6">B4 100</text>
+                </g>
+                <g transform="translate(0,68)">
+                  <rect x="0" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="14" cy="18" r="3.5" fill="#ead29c"/><text x="26" y="22" fill="#f4efe6">C1 100</text>
+                  <rect x="135" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="149" cy="18" r="3.5" fill="#ead29c"/><text x="161" y="22" fill="#f4efe6">C2 100</text>
+                  <rect x="270" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="284" cy="18" r="3.5" fill="#ead29c"/><text x="296" y="22" fill="#f4efe6">C3 100</text>
+                  <rect x="405" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="419" cy="18" r="3.5" fill="#ead29c"/><text x="431" y="22" fill="#f4efe6">C4 100</text>
+                  <rect x="540" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="554" cy="18" r="3.5" fill="#ead29c"/><text x="566" y="22" fill="#f4efe6">D1 100</text>
+                  <rect x="675" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="689" cy="18" r="3.5" fill="#ead29c"/><text x="701" y="22" fill="#f4efe6">D2 100</text>
+                  <rect x="810" y="0" width="126" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="824" cy="18" r="3.5" fill="#ead29c"/><text x="836" y="22" fill="#f4efe6">D3 100</text>
+                  <rect x="945" y="0" width="127" height="36" fill="#101014" stroke="#d6b87a" stroke-opacity="0.22"/><circle cx="959" cy="18" r="3.5" fill="#ead29c"/><text x="971" y="22" fill="#f4efe6">D4 100</text>
+                </g>
+              </g>
+
+              <!-- Footer strip -->
+              <line x1="64" y1="538" x2="1136" y2="538" stroke="#d6b87a" stroke-opacity="0.16"/>
+              <text x="64" y="574" fill="#d6b87a" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="14">$ npx pawtest https://waterdolphinkiller.github.io/pawtest/ --full</text>
+              <text x="1136" y="574" text-anchor="end" fill="#9e9588" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13">96.8 KB · $0 LLM API COST · READ-ONLY TAB POOL</text>
+            </svg>
+          </div>
+          <aside class="dogfood-meta" aria-label="Dogfood verification specifications">
+            <div>
+              <div class="section-kicker">Audit Certificate</div>
+              <ul class="audit-kv">
+                <li><span>Human UX</span><strong class="grade-s">S · 100 / 100</strong></li>
+                <li><span>AI Agent Readiness</span><strong class="grade-s">S · 100 / 100</strong></li>
+                <li><span>Transport</span><strong>Raw RFC 6455 + CDP</strong></li>
+                <li><span>Security Export</span><strong>SARIF 2.1.0</strong></li>
+                <li><span>MCP Server</span><strong>3 Lean Tools</strong></li>
+                <li><span>License</span><strong>MIT Open Source</strong></li>
+              </ul>
+            </div>
+            <a class="btn btn-primary" href="https://github.com/waterdolphinkiller/pawtest" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
+          </aside>
+        </div>
       </div>
     </section>
 
     <section id="webmcp" class="section" aria-labelledby="webmcp-title">
-      <h2 id="webmcp-title">WebMCP &amp; Safe Confirmation Gate Reference</h2>
-      <p class="sub">This form registers a declarative W3C WebMCP tool and enforces an explicit confirmation dialog for state-changing actions.</p>
-      <form id="audit-preview-form" class="demo-form" toolname="preview_pawtest_command" tooldescription="Generate a safe read-only PawTest CLI command for a target URL.">
-        <div>
-          <label for="target-url">Target Website URL</label>
-          <input id="target-url" name="url" type="url" maxlength="120" value="https://pawtest.dev" required />
+      <div class="container">
+        <div class="webmcp-panel reveal">
+          <div>
+            <div class="section-kicker">Interactive Reference · W3C WebMCP &amp; Safety Gate</div>
+            <h2 id="webmcp-title">Declarative Tool &amp; Confirmation Gate</h2>
+            <p class="hero-lead" style="margin-top: 16px;">
+              This form registers a live declarative W3C WebMCP tool (<code>preview_pawtest_command</code>) on <code>document.modelContext</code> and requires an explicit confirmation dialog before resetting state.
+            </p>
+          </div>
+
+          <form id="audit-preview-form" class="demo-form" toolname="preview_pawtest_command" tooldescription="Generate a safe read-only PawTest CLI command for a target URL.">
+            <div>
+              <label for="target-url">Target Website URL</label>
+              <input id="target-url" name="url" type="url" maxlength="120" value="https://waterdolphinkiller.github.io/pawtest/" required />
+            </div>
+            <div class="cta-row">
+              <button type="button" id="safe-preview-btn" class="btn btn-primary" aria-label="Generate CLI Command">Generate CLI Command</button>
+              <button type="button" id="reset-btn" class="btn" data-confirm-gate="true" aria-haspopup="dialog">Reset Demo State</button>
+            </div>
+            <div id="demo-status" class="status-note" role="status" aria-live="polite"></div>
+          </form>
         </div>
-        <div class="cta-row">
-          <button type="button" id="safe-preview-btn" class="btn primary" aria-label="Generate CLI Command">Generate CLI Command</button>
-          <button type="button" id="reset-btn" class="btn" data-confirm-gate="true" aria-haspopup="dialog">Reset Demo State</button>
+
+        <dialog id="confirm-dialog" aria-label="Confirm Reset">
+          <h3>Confirm Local Reset</h3>
+          <p>Reset the PawTest demo form back to its default URL? No remote data is modified.</p>
+          <div class="cta-row">
+            <button type="button" id="confirm-yes" class="btn btn-primary">Confirm Reset</button>
+            <button type="button" id="confirm-cancel" class="btn">Cancel</button>
+          </div>
+        </dialog>
+      </div>
+    </section>
+
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Developer Questions</div>
+            <h2 id="faq-title">Frequently Asked Questions</h2>
+          </div>
+          <p class="section-sub">Straight answers on how PawTest works with Lighthouse, CI/CD, Claude Code, and Cursor.</p>
         </div>
-        <div id="demo-status" class="status-note" role="status" aria-live="polite"></div>
-      </form>
-      <dialog id="confirm-dialog" aria-label="Confirm Reset">
-        <p>Confirm resetting the local PawTest demo form? No remote data is modified.</p>
-        <div class="cta-row">
-          <button type="button" id="confirm-yes" class="btn primary">Confirm Reset</button>
-          <button type="button" id="confirm-cancel" class="btn">Cancel</button>
+
+        <div class="faq-list reveal">
+          <details class="faq-item" open>
+            <summary><span>How is PawTest different from Google Lighthouse?</span><span class="faq-plus" aria-hidden="true">+</span></summary>
+            <p>Google Lighthouse evaluates speed, basic accessibility, and SEO for human visitors. PawTest covers those core human UX checks and adds 2026 AI agent readiness probes: WAF fingerprinting (Cloudflare, DataDome, Akamai, PerimeterX), Markdown Token-Tax, DOM vs. JSON-LD price parity, W3C WebMCP schemas, HTTP 402/x402, and indirect prompt injection scanning.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span>Does PawTest require an OpenAI or Anthropic API key?</span><span class="faq-plus" aria-hidden="true">+</span></summary>
+            <p>No. PawTest runs 100% deterministic code locally against your installed Chrome, Edge, or Brave browser over raw Chrome DevTools Protocol (CDP). Zero runtime npm dependencies, zero cloud uploads, and $0 LLM API cost.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span>How do I connect PawTest to Claude Code or Cursor via MCP?</span><span class="faq-plus" aria-hidden="true">+</span></summary>
+            <p>Run <code>npx pawtest --mcp</code> or add it to your MCP server config. It exposes three lean tools (<code>pawtest_audit</code>, <code>pawtest_cat</code>, and <code>pawtest_fix_prompt</code>) so your AI coding assistant can audit localhost, generate ready-to-commit scaffolds, and re-verify fixes automatically.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span>How can I check if my site accidentally blocks AI shopping or search agents?</span><span class="faq-plus" aria-hidden="true">+</span></summary>
+            <p>Run <code>npx pawtest https://your-site.com --full</code>. PawTest evaluates RFC 9309 tiered crawler policies, Cloudflare <code>Content-Signal</code>, seven <code>/.well-known/</code> manifests (UCP, ACP, AP2, A2A, MCP, RFC 9421), and detects active anti-bot challenges.</p>
+          </details>
         </div>
-      </dialog>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <div>PawTest — MIT Licensed Open Source · Zero-Upload Local QA Engine</div>
-      <div class="footer-links">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">PawTest v3.1.1 — Open-Source Website QA &amp; AI Agent Readiness</div>
+        <div class="footer-note">MIT Licensed · Zero-Upload Local Browser Engine</div>
+      </div>
+      <nav class="footer-links" aria-label="Machine-readable and repository links">
         <a href="./llms.txt">llms.txt</a>
         <a href="./index.md">Markdown View</a>
         <a href="./robots.txt">robots.txt</a>
+        <a href="./sitemap.xml">sitemap.xml</a>
         <a href="./.well-known/ucp">UCP Manifest</a>
-      </div>
+        <a href="https://github.com/waterdolphinkiller/pawtest" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
     </div>
   </footer>
 
   <script>
+    // 1. Declarative W3C WebMCP registration
     if (!document.modelContext) {
       Object.defineProperty(document, 'modelContext', {
         value: {
@@ -280,6 +1137,114 @@
         configurable: true
       });
     }
+
+    // 2. Scroll progress & silky reveal
+    document.documentElement.classList.add('js-ready');
+    const scrollBar = document.getElementById('scroll-bar');
+    const updateScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      scrollBar.style.transform = `scaleX(${p})`;
+    };
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    updateScroll();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        }
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+    }
+
+    // 3. Hero Feature Switcher & Copy
+    const MODES = {
+      audit: {
+        cmd: 'npx pawtest https://your-site.com --full --share-card --gif',
+        caption: 'Runs all 16 browser probes via a shared read-only tab pool (~5.7s) and exports a 1200×630 scorecard + pure-JS GIF.',
+        tag: '$0 API Cost'
+      },
+      diff: {
+        cmd: 'npx pawtest diff https://vercel.com https://airbnb.com --share-card',
+        caption: 'Head-to-head dual-axis PK comparison across Human UX, AI Agent Readiness, Token-Tax, and WAF blocks.',
+        tag: 'Viral PK Card'
+      },
+      mcp: {
+        cmd: 'npx pawtest --mcp',
+        caption: 'Starts the lean 3-tool MCP server (pawtest_audit, pawtest_cat, pawtest_fix_prompt) for Claude Code & Cursor.',
+        tag: 'Claude & Cursor'
+      },
+      scaffold: {
+        cmd: 'npx pawtest https://your-site.com --full --apply-scaffolds ./public',
+        caption: 'Auto-generates ready-to-commit llms.txt, robots.txt, /.well-known/ucp, agent-card.json & WebMCP snippets.',
+        tag: 'Auto-Fix'
+      }
+    };
+    let activeCmd = MODES.audit.cmd;
+    const heroCmdEl = document.getElementById('hero-cmd');
+    const heroCapEl = document.getElementById('hero-caption');
+    const heroTagEl = document.getElementById('hero-tag');
+    document.querySelectorAll('.mode-tab').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const m = MODES[btn.dataset.mode];
+        if (!m) return;
+        document.querySelectorAll('.mode-tab').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+        activeCmd = m.cmd;
+        heroCmdEl.style.opacity = '0.25';
+        setTimeout(() => {
+          heroCmdEl.innerHTML = `<span class="cmd-prompt">$</span>${m.cmd}`;
+          heroCapEl.textContent = m.caption;
+          heroTagEl.textContent = m.tag;
+          heroCmdEl.style.opacity = '1';
+        }, 120);
+      });
+    });
+
+    const copyBtn = document.getElementById('copy-cmd-btn');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(activeCmd);
+        }
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1400);
+      } catch {
+        copyBtn.textContent = 'Ready';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1200);
+      }
+    });
+
+    // 4. Matrix & Benchmark Interactive Filters
+    document.querySelectorAll('button[data-squad]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sq = btn.dataset.squad;
+        document.querySelectorAll('button[data-squad]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        document.querySelectorAll('#matrix-grid .cat-card').forEach((card) => {
+          card.hidden = sq !== 'all' && card.dataset.squad !== sq;
+        });
+      });
+    });
+
+    document.querySelectorAll('button[data-bench]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.bench;
+        document.querySelectorAll('button[data-bench]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        document.querySelectorAll('#bench-body tr').forEach((tr) => {
+          if (key === 'all') tr.hidden = false;
+          else if (key === 'md') tr.hidden = tr.dataset.md !== '1';
+          else if (key === 'waf') tr.hidden = tr.dataset.waf !== '1';
+          else if (key === 's') tr.hidden = tr.dataset.s !== '1';
+        });
+      });
+    });
+
+    // 5. WebMCP Form & Safe Confirmation Gate
     const previewBtn = document.getElementById('safe-preview-btn');
     const resetBtn = document.getElementById('reset-btn');
     const urlInput = document.getElementById('target-url');
@@ -292,7 +1257,7 @@
       busy = true;
       previewBtn.disabled = true;
       previewBtn.setAttribute('aria-busy', 'true');
-      const val = (urlInput.value || 'https://pawtest.dev').trim();
+      const val = (urlInput.value || 'https://waterdolphinkiller.github.io/pawtest/').trim();
       statusEl.textContent = `Ready: npx pawtest ${val} --full --share-card --gif`;
       setTimeout(() => {
         busy = false;
@@ -305,11 +1270,262 @@
       if (typeof dialog.showModal === 'function') dialog.showModal();
     });
     document.getElementById('confirm-yes').addEventListener('click', () => {
-      urlInput.value = 'https://pawtest.dev';
+      urlInput.value = 'https://waterdolphinkiller.github.io/pawtest/';
       statusEl.textContent = 'Demo state reset.';
       dialog.close();
     });
     document.getElementById('confirm-cancel').addEventListener('click', () => dialog.close());
+
+    // 6. Pure-Code WebGL2 Faceted Crystal Origami Cat Hero Specimen (0 external models)
+    (() => {
+      const canvas = document.getElementById('crystal-stage');
+      if (!canvas) return;
+      const gl = canvas.getContext('webgl2', { antialias: true, alpha: true, powerPreference: 'high-performance' });
+      if (!gl) return;
+
+      const CRAFTS = [
+        { name: '01 · Obsidian 24K Kintsugi', base: [0.055, 0.055, 0.068], edge: [0.92, 0.78, 0.44], spec: [1.0, 0.88, 0.58] },
+        { name: '02 · Emerald Crystal & Brass', base: [0.025, 0.14, 0.11], edge: [0.46, 0.92, 0.74], spec: [0.76, 1.0, 0.88] },
+        { name: '03 · Smoked Cognac Baccarat', base: [0.15, 0.065, 0.025], edge: [0.95, 0.68, 0.32], spec: [1.0, 0.84, 0.52] }
+      ];
+      let craftIdx = 0;
+      const craftNameEl = document.getElementById('craft-name');
+      document.querySelectorAll('.craft-dot').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          craftIdx = Number(btn.dataset.craft) || 0;
+          craftNameEl.textContent = CRAFTS[craftIdx].name;
+          document.querySelectorAll('.craft-dot').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        });
+      });
+
+      const vs = `#version 300 es
+        in vec3 aPos;
+        in vec3 aBary;
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform mat4 uModel;
+        out vec3 vWorld;
+        out vec3 vBary;
+        void main() {
+          vec4 w = uModel * vec4(aPos, 1.0);
+          vWorld = w.xyz;
+          vBary = aBary;
+          gl_Position = uProj * uView * w;
+        }`;
+
+      const fs = `#version 300 es
+        precision highp float;
+        in vec3 vWorld;
+        in vec3 vBary;
+        uniform vec3 uCam;
+        uniform vec3 uBase;
+        uniform vec3 uEdge;
+        uniform vec3 uSpec;
+        uniform float uMirror;
+        out vec4 outColor;
+        void main() {
+          vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+          if (uMirror > 0.5) N = -N;
+          vec3 V = normalize(uCam - vWorld);
+          vec3 L1 = normalize(vec3(2.4, 3.6, 2.8));
+          vec3 L2 = normalize(vec3(-2.6, 1.8, -1.8));
+          float d1 = max(dot(N, L1), 0.0);
+          float d2 = max(dot(N, L2), 0.0);
+          vec3 H1 = normalize(L1 + V);
+          vec3 H2 = normalize(L2 + V);
+          float s1 = pow(max(dot(N, H1), 0.0), 42.0);
+          float s2 = pow(max(dot(N, H2), 0.0), 24.0);
+          float fres = pow(1.0 - max(dot(N, V), 0.0), 3.2);
+
+          vec3 dB = fwidth(vBary);
+          vec3 a3 = smoothstep(vec3(0.0), dB * 1.35, vBary);
+          float wire = 1.0 - min(min(a3.x, a3.y), a3.z);
+
+          vec3 col = uBase * (0.28 + 0.95 * d1 + 0.35 * d2)
+                   + uSpec * (s1 * 0.92 + s2 * 0.32)
+                   + uEdge * fres * 0.58;
+          col = mix(col, uEdge * 1.18, wire * 0.72);
+
+          col = (col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14);
+          col = pow(clamp(col, 0.0, 1.0), vec3(1.0 / 2.2));
+          float alpha = uMirror > 0.5 ? clamp(0.24 - max(0.0, -vWorld.y) * 0.11, 0.0, 0.24) : 1.0;
+          outColor = vec4(col, alpha);
+        }`;
+
+      const compile = (type, src) => {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return s;
+      };
+      const prog = gl.createProgram();
+      gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
+
+      const pos = [];
+      const bary = [];
+      const tri = (a, b, c) => {
+        pos.push(...a, ...b, ...c);
+        bary.push(1, 0, 0, 0, 1, 0, 0, 0, 1);
+      };
+      const quad = (a, b, c, d) => { tri(a, b, c); tri(a, c, d); };
+      const mirror = (p) => [-p[0], p[1], p[2]];
+      const symTri = (a, b, c) => { tri(a, b, c); tri(mirror(a), mirror(c), mirror(b)); };
+      const symQuad = (a, b, c, d) => { quad(a, b, c, d); quad(mirror(a), mirror(d), mirror(c), mirror(b)); };
+
+      const baseF = [0, 0.0, 0.36], baseS = [0.34, 0.0, 0.14], baseB = [0.28, 0.0, -0.34], baseR = [0, 0.0, -0.44];
+      const midF = [0, 0.62, 0.30], midS = [0.30, 0.62, 0.08], midB = [0.24, 0.62, -0.28], midR = [0, 0.62, -0.36];
+      const neckF = [0, 1.18, 0.22], neckS = [0.18, 1.18, 0.06], neckB = [0.16, 1.18, -0.16], neckR = [0, 1.18, -0.22];
+
+      symQuad(baseF, baseS, midS, midF);
+      symQuad(baseS, baseB, midB, midS);
+      symQuad(baseB, baseR, midR, midB);
+      symQuad(midF, midS, neckS, neckF);
+      symQuad(midS, midB, neckB, neckS);
+      symQuad(midB, midR, neckR, neckB);
+
+      const chin = [0, 1.24, 0.34], nose = [0, 1.44, 0.44], brow = [0, 1.66, 0.30], crown = [0, 1.72, 0.02], occ = [0, 1.50, -0.24];
+      const cheek = [0.26, 1.38, 0.18], temple = [0.28, 1.62, 0.06], jaw = [0.18, 1.24, 0.02], backH = [0.20, 1.46, -0.18];
+
+      symTri(chin, cheek, nose);
+      symTri(nose, cheek, brow);
+      symTri(brow, cheek, temple);
+      symTri(brow, temple, crown);
+      symTri(crown, temple, backH);
+      symTri(crown, backH, occ);
+      symTri(chin, jaw, cheek);
+      symTri(cheek, jaw, backH);
+      symTri(cheek, backH, temple);
+      symTri(jaw, neckS, backH);
+      symTri(occ, backH, neckR);
+
+      const earBaseIn = [0.09, 1.68, 0.08];
+      const earBaseOut = [0.27, 1.61, 0.05];
+      const earBaseBack = [0.20, 1.56, -0.14];
+      const earTip = [0.26, 2.12, -0.02];
+      symTri(earBaseIn, earBaseOut, earTip);
+      symTri(earBaseOut, earBaseBack, earTip);
+      symTri(earBaseBack, earBaseIn, earTip);
+
+      const t0 = [0.06, 0.05, -0.40], t1 = [0.46, 0.10, -0.34], t2 = [0.58, 0.18, 0.04], t3 = [0.44, 0.24, 0.32];
+      const t0u = [0.06, 0.20, -0.36], t1u = [0.42, 0.24, -0.28], t2u = [0.52, 0.32, 0.04], t3u = [0.38, 0.34, 0.28];
+      quad(t0, t1, t1u, t0u);
+      quad(t1, t2, t2u, t1u);
+      quad(t2, t3, t3u, t2u);
+      tri(t3, [0.34, 0.28, 0.38], t3u);
+
+      const vao = gl.createVertexArray();
+      gl.bindVertexArray(vao);
+      const pBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, pBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pos), gl.STATIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, 'aPos');
+      gl.enableVertexAttribArray(aPos);
+      gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+
+      const bBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, bBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bary), gl.STATIC_DRAW);
+      const aBary = gl.getAttribLocation(prog, 'aBary');
+      gl.enableVertexAttribArray(aBary);
+      gl.vertexAttribPointer(aBary, 3, gl.FLOAT, false, 0, 0);
+
+      const uProj = gl.getUniformLocation(prog, 'uProj');
+      const uView = gl.getUniformLocation(prog, 'uView');
+      const uModel = gl.getUniformLocation(prog, 'uModel');
+      const uCam = gl.getUniformLocation(prog, 'uCam');
+      const uBase = gl.getUniformLocation(prog, 'uBase');
+      const uEdge = gl.getUniformLocation(prog, 'uEdge');
+      const uSpec = gl.getUniformLocation(prog, 'uSpec');
+      const uMirror = gl.getUniformLocation(prog, 'uMirror');
+
+      const persp = (fov, aspect, n, f) => {
+        const t = 1 / Math.tan(fov / 2);
+        return new Float32Array([t / aspect, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) / (n - f), -1, 0, 0, (2 * f * n) / (n - f), 0]);
+      };
+      const lookAt = (e, c, u) => {
+        const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+        const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+        const norm = (a) => { const l = Math.hypot(...a) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
+        const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+        const z = norm(sub(e, c)), x = norm(cross(u, z)), y = cross(z, x);
+        return new Float32Array([x[0], y[0], z[0], 0, x[1], y[1], z[1], 0, x[2], y[2], z[2], 0, -dot(x, e), -dot(y, e), -dot(z, e), 1]);
+      };
+      const rotYScale = (ang, sy, ty) => {
+        const c = Math.cos(ang), s = Math.sin(ang);
+        return new Float32Array([c, 0, -s, 0, 0, sy, 0, 0, s, 0, c, 0, 0, ty, 0, 1]);
+      };
+
+      let targetYaw = 0.42, currentYaw = 0.42, targetPitch = 0, currentPitch = 0;
+      const frameEl = canvas.parentElement;
+      frameEl.addEventListener('pointermove', (e) => {
+        const r = frameEl.getBoundingClientRect();
+        const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+        const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+        targetYaw = nx * 0.9;
+        targetPitch = ny * 0.25;
+      }, { passive: true });
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
+        const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w; canvas.height = h;
+        }
+        gl.viewport(0, 0, w, h);
+      };
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let visible = true;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0.05 }).observe(canvas);
+      }
+
+      const vertCount = pos.length / 3;
+      let t = 0;
+      const render = () => {
+        if (visible) {
+          resize();
+          if (!reduceMotion) t += 0.008;
+          currentYaw += (targetYaw - currentYaw) * 0.06;
+          currentPitch += (targetPitch - currentPitch) * 0.06;
+
+          gl.clearColor(0, 0, 0, 0);
+          gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+          gl.enable(gl.DEPTH_TEST);
+          gl.enable(gl.BLEND);
+          gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+          const cam = [0.0, 1.32 - currentPitch * 0.55, 3.75];
+          const proj = persp(0.68, canvas.width / Math.max(1, canvas.height), 0.1, 30);
+          const view = lookAt(cam, [0, 0.96, 0], [0, 1, 0]);
+          const craft = CRAFTS[craftIdx];
+
+          gl.uniformMatrix4fv(uProj, false, proj);
+          gl.uniformMatrix4fv(uView, false, view);
+          gl.uniform3fv(uCam, cam);
+          gl.uniform3fv(uBase, craft.base);
+          gl.uniform3fv(uEdge, craft.edge);
+          gl.uniform3fv(uSpec, craft.spec);
+
+          const ang = t + currentYaw;
+          gl.uniform1f(uMirror, 1.0);
+          gl.uniformMatrix4fv(uModel, false, rotYScale(ang, -1.0, -0.02));
+          gl.drawArrays(gl.TRIANGLES, 0, vertCount);
+
+          gl.uniform1f(uMirror, 0.0);
+          gl.uniformMatrix4fv(uModel, false, rotYScale(ang, 1.0, 0.0));
+          gl.drawArrays(gl.TRIANGLES, 0, vertCount);
+        }
+        if (!reduceMotion) requestAnimationFrame(render);
+      };
+      render();
+    })();
   </script>
 </body>
 </html>
